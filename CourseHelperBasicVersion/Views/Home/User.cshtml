@@ -1,0 +1,46 @@
+﻿@model EnrollmentInfo
+@{
+    ViewBag.Title = "Adding Students";
+    ViewBag.Active = "Manage";
+}
+
+<div class="title-header">
+    <h2>Manage Enrollment: @Model.Course.Name</h2>
+    <br />
+    @*<h4>Space remaining: 27/30</h4>*@
+</div>
+
+<div class="content-container">
+    <form class="form-inline">
+        <input class="form-control mr-sm-2 mb-3" type="search" placeholder="Search">
+        <button class="btn btn-info mb-3">Search</button>
+    </form>
+    @if (Model.UnenrolledStudents.Count() == 0)
+    {
+        <table class="table mb-3 content-table">
+        <thead>
+            <tr align="center">
+                <th scope="col" colspan="5">No Students available to enrol</th>
+            </tr>
+        </thead>
+        </table>
+    }
+    else
+    {
+    @Html.Partial("StudentTable", Model.UnenrolledStudents)
+    @Html.Partial("EnrollForm", new EnrollmentList() { CourseID = Model.Course.CourseId })
+    }
+</div>
+
+<script>
+    $('tr.content-row').click(function () {
+        var studentID = $(this).children().first().text();
+        if ($(this).hasClass('selected')) {
+            $(this).removeClass('selected');
+            $('#enrollForm').children("[id='ID" + studentID + "']").remove();
+        } else {
+            $(this).addClass('selected');
+            $('<input>').attr('name', 'EnrollQueue').attr('id', 'ID' + studentID).attr('value', studentID).attr('type', 'hidden').appendTo('#enrollForm');
+        }
+    });
+</script>

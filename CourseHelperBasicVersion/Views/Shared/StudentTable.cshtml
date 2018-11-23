@@ -1,0 +1,25 @@
+﻿@model IEnumerable<Student>
+
+<table class="table mb-3 content-table">
+    <thead>
+        <tr>
+            <th scope="col">STUDENT ID</th>
+            <th scope="col">NAME</th>
+            <th scope="col">STATUS</th>
+            <th scope="col">SEMESTER</th>
+            <th scope="col">REGISTRATION</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (Student s in Model)
+        {
+            <tr class="content-row">
+                <td>@s.StudentNumber</td>
+                <td>@s.LastName, @s.FirstName</td>
+                <td>@s.Status</td>
+                <td>@s.Semester</td>
+                <td>@(s.IsRegistered ? "Registered" : "Not Registered")</td>
+            </tr>
+        }
+    </tbody>
+</table>

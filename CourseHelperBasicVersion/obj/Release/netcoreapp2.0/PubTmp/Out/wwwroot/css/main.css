@@ -1,0 +1,149 @@
+﻿@font-face {
+    font-family: "Roboto";
+    src: url("../fonts/Roboto-Regular.eot?#iefix") format('embedded-opentype'), 
+         url("../fonts/Roboto-Regular.woff") format('woff'), 
+         url("../fonts/Roboto-Regular.ttf") format('truetype'),
+         url("../fonts/Roboto-Regular.svg") format('svg');
+}
+
+html, body {
+    height: 100%;
+    width: 100%;
+    font-family: 'Roboto', sans-serif;
+    background-color: #333333;
+}
+
+a {
+    text-decoration: none;
+}
+
+/* navigation */
+
+.navbar-menu {
+    cursor: pointer;
+    display: none;
+    z-index: 10;
+    position: fixed;
+    top: 0;
+}
+
+.navbar-vertical {
+    width: 210px;
+    position: fixed;
+    border-radius: 0;
+    height: 100vh;
+    background-color: #666666;
+    overflow: hidden;
+    margin: 0;
+    transition: width 1s ease-in-out;
+}
+
+.content-logo {
+    display: block;
+    margin: 40px auto 80px;
+}
+
+.navbar-links {
+    float: none;
+    list-style-type: none;
+    padding: 0;
+}
+
+.navbar-links li {
+    font-size: 24px;
+    text-align: right;
+    margin: 20px 10px;
+    padding: 10px 40px;
+    border-radius: 16px;
+}
+
+.navbar-links li a {
+    display: block;
+    color: #ffffff;
+    width: 100%;
+    transition: color 0.25s ease-in-out;
+}
+
+.navbar-links li a:hover {
+    color: #222222;
+    text-decoration: none;
+}
+
+/*.navbar-links li.active {
+    background-color: #99b3ff;
+}*/
+
+.navbar-links .active a {
+    color: #222222;
+}
+
+.navbar-footer {
+    display: block;
+    float: left;
+    position: absolute;
+    bottom: 50px;
+    left: 0;
+}
+
+.navbar-footer > a {
+    margin-left: 20px;
+}
+
+/* end of navigation*/
+
+/* wrapper body */
+.wrapper {
+    margin-left: 210px;
+    transition: 1s ease-in-out;
+}
+
+/* body */
+.title-header {
+    text-align: center;
+    color: #ffffff;
+    padding-top: 60px;
+    padding-bottom: 60px;
+}
+
+.insert-form {
+    width: 50%;
+    margin: 0 auto;
+}
+
+.content-container {
+    margin: 0 auto;
+    width: 70%;
+}
+
+/* main page gallery */
+.gallery {
+    width: 100%;
+    height: 500px;
+}
+
+/* mobile */
+@media only screen and (max-width: 767px) {
+    .navbar-vertical {
+        width: 0;
+    }
+    .navbar-menu {
+        display: block;
+    }
+    .navbar-links li {
+        font-size: 20px;
+        text-align: right;
+        margin: 10px 10px;
+        padding: 5px 20px;
+        border-radius: 16px;
+    }
+    .wrapper {
+        margin-left: 0;
+    }
+    .gallery {
+        display: none;
+    }
+    .navbar-footer {
+        bottom: 80px;
+    }
+}
+

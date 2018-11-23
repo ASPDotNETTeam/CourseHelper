@@ -1,0 +1,12 @@
+D:\Web Dev\CourseHelperBasicVersion\CourseHelperBasicVersion
+--output-path=obj\Release\netcoreapp2.0\
+--application-name=CourseHelperBasicVersion
+--content-root=D:\Web Dev\CourseHelperBasicVersion\CourseHelperBasicVersion
+--file=D:\Web Dev\CourseHelperBasicVersion\CourseHelperBasicVersion\Views\Home\Data.cshtml
+--file=D:\Web Dev\CourseHelperBasicVersion\CourseHelperBasicVersion\Views\Home\Display.cshtml
+--file=D:\Web Dev\CourseHelperBasicVersion\CourseHelperBasicVersion\Views\Home\Index.cshtml
+--file=D:\Web Dev\CourseHelperBasicVersion\CourseHelperBasicVersion\Views\Home\Insert.cshtml
+--file=D:\Web Dev\CourseHelperBasicVersion\CourseHelperBasicVersion\Views\Home\User.cshtml
+--file=D:\Web Dev\CourseHelperBasicVersion\CourseHelperBasicVersion\Views\Shared\_BaseLayout.cshtml
+--file=D:\Web Dev\CourseHelperBasicVersion\CourseHelperBasicVersion\Views\_ViewImports.cshtml
+--file=D:\Web Dev\CourseHelperBasicVersion\CourseHelperBasicVersion\Views\_ViewStart.cshtml

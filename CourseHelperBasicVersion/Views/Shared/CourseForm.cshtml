@@ -1,0 +1,25 @@
+﻿@model Course
+<div class="form-group row">
+    <input type="hidden" asp-for="CourseId" />
+    <label class="col-sm-5 col-form-label-lg mb-sm-4" for="Name">Name</label>
+    <div class="col-sm-7">
+        <input type="text" class="form-control" asp-for="Name" placeholder="Name" required />
+    </div>
+    <label class="col-sm-5 col-form-label-lg mb-sm-4" for="Code">Course Code</label>
+    <div class="col-sm-7">
+        <input type="text" class="form-control" asp-for="Code" placeholder="Course Code" required />
+    </div>
+    <label class="col-sm-5 col-form-label-lg mb-sm-4" for="Season">Season</label>
+    <div class="col-sm-7">
+        <select class="form-control" asp-for="Season" asp-items="@Html.GetEnumSelectList<SEASON>()"></select>
+    </div>
+    <label class="col-sm-5 col-form-label-lg mb-sm-4" for="Faculty">Faculty</label>
+    <div class="col-sm-7">
+        <input type="text" class="form-control" asp-for="Faculty" placeholder="Faculty" required />
+    </div>
+    <label class="col-sm-5 col-form-label-lg mb-sm-4" for="Description">Description</label>
+    <div class="col-sm-7">
+        <textarea class="form-control" asp-for="Description" placeholder="Description of course" rows="3"></textarea>
+    </div>
+</div>
+@*<div class="col-lg-12" asp-validation-summary="All" style="color:white;margin-top:20px;padding-left:0;"></div>*@

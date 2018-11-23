@@ -1,0 +1,11 @@
+D:\Web Dev\CourseHelperBasicVersion\CourseHelperBasicVersion\bin\Release\netcoreapp2.0\CourseHelperBasicVersion.deps.json
+D:\Web Dev\CourseHelperBasicVersion\CourseHelperBasicVersion\bin\Release\netcoreapp2.0\CourseHelperBasicVersion.runtimeconfig.json
+D:\Web Dev\CourseHelperBasicVersion\CourseHelperBasicVersion\bin\Release\netcoreapp2.0\CourseHelperBasicVersion.runtimeconfig.dev.json
+D:\Web Dev\CourseHelperBasicVersion\CourseHelperBasicVersion\bin\Release\netcoreapp2.0\CourseHelperBasicVersion.dll
+D:\Web Dev\CourseHelperBasicVersion\CourseHelperBasicVersion\bin\Release\netcoreapp2.0\CourseHelperBasicVersion.pdb
+D:\Web Dev\CourseHelperBasicVersion\CourseHelperBasicVersion\obj\Release\netcoreapp2.0\CourseHelperBasicVersion.csprojAssemblyReference.cache
+D:\Web Dev\CourseHelperBasicVersion\CourseHelperBasicVersion\obj\Release\netcoreapp2.0\CourseHelperBasicVersion.csproj.CoreCompileInputs.cache
+D:\Web Dev\CourseHelperBasicVersion\CourseHelperBasicVersion\obj\Release\netcoreapp2.0\CourseHelperBasicVersion.AssemblyInfoInputs.cache
+D:\Web Dev\CourseHelperBasicVersion\CourseHelperBasicVersion\obj\Release\netcoreapp2.0\CourseHelperBasicVersion.AssemblyInfo.cs
+D:\Web Dev\CourseHelperBasicVersion\CourseHelperBasicVersion\obj\Release\netcoreapp2.0\CourseHelperBasicVersion.dll
+D:\Web Dev\CourseHelperBasicVersion\CourseHelperBasicVersion\obj\Release\netcoreapp2.0\CourseHelperBasicVersion.pdb
