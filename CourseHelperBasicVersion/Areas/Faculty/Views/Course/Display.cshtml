@@ -7,7 +7,6 @@
 <div class="title-header">
     <h2>List of Courses</h2>
 </div>
-
 <div class="content-container">
     <form class="form-inline">
         <input class="form-control mr-sm-2 mb-3" type="search" placeholder="Search">
@@ -82,7 +81,7 @@
             // configures edit button href to course code of selected row
             href = editHref + "/" + $(this).parent().children(':nth-child(2)').text();
             $('#editButton').attr('href', href);
-            // configures add student button rhef to course code of selected row
+            // configures add student button href to course code of selected row
             href = manageHref + "/" + $(this).parent().children(':nth-child(2)').text();
             $('#manageButton').attr('href', href);
         }

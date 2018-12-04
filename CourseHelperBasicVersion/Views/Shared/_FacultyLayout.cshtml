@@ -24,11 +24,11 @@
         <div class="navbar-vertical">
             <a asp-action="Index"><img src="~/images/logo-black.png" width="130" height="100" class="content-logo" /></a>
             <ul class="navbar-links">
-                <li @(ViewBag.Active == "Home" ? "class=active" : "")><a asp-action="Index"><span>HOME</span></a></li>
-                <li @(ViewBag.Active == "Display" ? "class=active" : "")><a asp-action="Display"><span>DISPLAY</span></a></li>
-                <li @(ViewBag.Active == "Insert" ? "class=active" : "")><a asp-action="Create"><span>INSERT</span></a></li>
-                <li @(ViewBag.Active == "Data" ? "class=active" : "")><a asp-action="Edit"><span>DATA</span></a></li>
-                <li @(ViewBag.Active == "Manage" ? "class=active" : "")><a asp-action="Manage" ><span>USER</span></a></li>
+                <li @(ViewBag.Active == "Home" ? "class=active" : "")><a asp-action="Index" asp-controller="Course" asp-area="Faculty"><span>HOME</span></a></li>
+                <li @(ViewBag.Active == "Display" ? "class=active" : "")><a asp-action="Display" asp-controller="Course" asp-area="Faculty"><span>DISPLAY</span></a></li>
+                <li @(ViewBag.Active == "Insert" ? "class=active" : "")><a asp-action="Create" asp-controller="Course" asp-area="Faculty"><span>INSERT</span></a></li>
+                <li @(ViewBag.Active == "Data" ? "class=active" : "")><a asp-action="Edit" asp-controller="Course" asp-area="Faculty"><span>DATA</span></a></li>
+                <li @(ViewBag.Active == "Manage" ? "class=active" : "")><a asp-action="Manage" asp-controller="Course" asp-area="Faculty"><span>USER</span></a></li>
             </ul>
             <div class="navbar-footer">
                 <a href="https://github.com/FrunkZhou/"><i class="fa fa-github" style="font-size:30px;color:white"></i></a>

@@ -1,0 +1,36 @@
+﻿@model UserModel
+@{
+    ViewBag.Title = "Register";
+}
+
+<div class="title-header">
+    <h2>Create an account</h2>
+</div>
+
+<div class="content-container">
+    <form class="insert-form" asp-action="Create" asp-route-area="Admin" asp-controller="Account" method="post" novalidate>
+        <div class="col-lg-12" asp-validation-summary="All" style="color:red;margin-top:20px;padding-left:0;"></div>
+        <div class="form-group row">
+            <input type="hidden" asp-for="Role" />
+            <label class="col-sm-5 col-form-label-lg mb-sm-4" for="FirstName">First Name</label>
+            <div class="col-sm-7">
+                <input type="text" class="form-control" asp-for="FirstName" placeholder="FirstName" required />
+            </div>
+            <label class="col-sm-5 col-form-label-lg mb-sm-4" for="LastName">Last Name</label>
+            <div class="col-sm-7">
+                <input type="text" class="form-control" asp-for="LastName" placeholder="LastName" required />
+            </div>
+            <label class="col-sm-5 col-form-label-lg mb-sm-4" for="UserName">Username</label>
+            <div class="col-sm-7">
+                <input type="text" class="form-control" asp-for="UserName" placeholder="Username" required />
+            </div>
+            <label class="col-sm-5 col-form-label-lg mb-sm-4" for="Password">Password</label>
+            <div class="col-sm-7">
+                <input type="password" class="form-control" asp-for="Password" required />
+            </div>
+        </div>
+        <br />
+        <button class="btn btn-primary my-3 mr-3" type="submit">Register</button>
+    </form>
+</div>
+

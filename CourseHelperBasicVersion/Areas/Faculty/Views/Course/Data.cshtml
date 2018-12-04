@@ -14,13 +14,13 @@
     <button class="btn btn-primary mb-3" type="submit">Update Course</button>
     <input type="hidden" asp-for="CourseId" />
     <button type="button" class="btn btn-danger mb-3 ml-3" data-toggle="modal" data-target="#deleteConfirmation">Delete</button>
+    <a class="btn btn-primary ml-3 mb-3" asp-action="Manage" asp-route-courseCode="@Model.Code">Add Students</a>
 </form>
 <br />
 <div class="content-container">
     @if (Model.CourseStudents.Count() != 0)
     {
         @Html.Partial("StudentTable", Model.Students)
-    <a class="btn btn-primary mb-3" asp-action="Manage" asp-route-course="@Model.Code">Add Students</a>
     }
 </div>
 

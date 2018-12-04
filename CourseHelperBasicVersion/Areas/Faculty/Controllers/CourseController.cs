@@ -4,18 +4,20 @@ using System.Linq;
 using System.Threading.Tasks;
 using CourseHelperBasicVersion.Models;
 using CourseHelperBasicVersion.Models.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CourseHelper.Controllers
 {
-    public class HomeController : Controller
+    [Area("Faculty")]
+    public class CourseController : Controller
     {
         private ICourseDatabase courseDB;
         private IStudentDatabase studentDB;
         private ICourseStudentDatabase csDB;
 
-        public HomeController(ICourseDatabase courseDB, IStudentDatabase studentDB, ICourseStudentDatabase csDB)
+        public CourseController(ICourseDatabase courseDB, IStudentDatabase studentDB, ICourseStudentDatabase csDB)
         {
             this.courseDB = courseDB;
             this.studentDB = studentDB;
@@ -27,6 +29,7 @@ namespace CourseHelper.Controllers
             return View();
         }
 
+        [Authorize(Roles = "Faculty")]
         public IActionResult Display()
         {
             return View(courseDB.Courses);

@@ -1,0 +1,46 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="~/lib/bootstrap/css/bootstrap.css" />
+    <link rel="stylesheet" href="~/lib/font-awesome/css/font-awesome.css" />
+    <link rel="stylesheet" href="~/css/main.css" type="text/css" />
+    <script src="~/lib/jquery/jquery.js"></script>
+    <script src="~/lib/bootstrap/js/bootstrap.bundle.js"></script>
+    <script src="~/js/navigation.js"></script>
+    <title>@ViewBag.Title</title>
+    <script>
+        $(document).ready(function () {
+            $('.navbar-vertical').hide();
+            $('.navbar-vertical').show();
+            $('.wrapper').hide();
+            $('.wrapper').show();
+        });
+    </script>
+</head>
+<body>
+    <nav>
+        <div class="navbar-vertical">
+            <a asp-action="Index"><img src="~/images/logo-black.png" width="130" height="100" class="content-logo" /></a>
+            <ul class="navbar-links">
+                <li @(ViewBag.Active == "Home" ? "class=active" : "")><a asp-action="Index"><span>HOME</span></a></li>
+                <li @(ViewBag.Active == "Display" ? "class=active" : "")><a asp-action="Display"><span>DISPLAY</span></a></li>
+                <li @(ViewBag.Active == "Insert" ? "class=active" : "")><a asp-action="Create"><span>INSERT</span></a></li>
+                <li @(ViewBag.Active == "Data" ? "class=active" : "")><a asp-action="Edit"><span>DATA</span></a></li>
+                <li @(ViewBag.Active == "Manage" ? "class=active" : "")><a asp-action="Manage"><span>USER</span></a></li>
+            </ul>
+            <div class="navbar-footer">
+                <a href="https://github.com/FrunkZhou/"><i class="fa fa-github" style="font-size:30px;color:white"></i></a>
+                <a href="https://www.facebook.com/aCourseHelper/"><i class="fa fa-facebook" style="font-size:30px;color:white"></i></a>
+                <a href="https://www.twitter.com/aCourseHelper/"><i class="fa fa-twitter" style="font-size:30px;color:white"></i></a>
+                <a href="https://www.youtube.com/aCourseHelper/"><i class="fa fa-youtube-play" style="font-size:30px;color:white"></i></a>
+            </div>
+        </div>
+    </nav>
+    <div class="wrapper">
+        <div class="navbar-menu"><i class="fa fa-bars nav-button"></i></div>
+        @RenderBody()
+    </div>
+</body>
+</html>

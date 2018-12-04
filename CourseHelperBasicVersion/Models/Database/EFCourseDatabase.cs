@@ -65,5 +65,23 @@ namespace CourseHelperBasicVersion.Models
             }
             return dbCourse;
         }
+
+        public void DeleteCourse(Course course)
+        {
+            if (course != null)
+            {
+                foreach (CourseStudent cs in course.CourseStudents)
+                {
+                    //gets student from DB
+                    Student dbStudent = dbContext.Students.First(s => s == cs.Student);
+                    //Remove course link from student
+                    dbStudent.CourseStudents.Remove(cs);
+                    //Remove the linked CourseStudent from 
+                    dbContext.CourseStudents.Remove(cs);
+                }
+                dbContext.Courses.Remove(course);
+                dbContext.SaveChanges();
+            }
+        }
     }
 }

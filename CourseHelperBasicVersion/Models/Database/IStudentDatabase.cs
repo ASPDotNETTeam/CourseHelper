@@ -10,6 +10,7 @@ namespace CourseHelperBasicVersion.Models
         IQueryable<Student> Students { get; }
         void SaveStudent(Student student);
         Student DeleteStudent(int id);
+        void DeleteStudent(Student student);
     }
 
 }
