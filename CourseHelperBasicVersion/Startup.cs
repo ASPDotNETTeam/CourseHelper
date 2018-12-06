@@ -69,7 +69,7 @@ namespace CourseHelperBasicVersion
                     );
                 routes.MapRoute(
                     name: "",
-                    template: "Faculty/Manage/{courseCode}",
+                    template: "General/Manage/{courseCode}",
                     defaults: new { controller = "Course", action = "Manage", area = "Faculty" }
                     );
                 routes.MapRoute(
@@ -88,6 +88,11 @@ namespace CourseHelperBasicVersion
                     defaults: new { area = "Admin", controller = "Account", action = "Create" }
                     );
                 routes.MapRoute(
+                    name: "",
+                    template: "Account/{action=List}",
+                    defaults: new { area = "Admin", controller = "Account" }
+                    );
+                routes.MapRoute(
                     name: "Login",
                     template: "Login",
                     defaults: new { area = "Admin", controller = "Account", action = "Login" }
@@ -103,9 +108,14 @@ namespace CourseHelperBasicVersion
                     defaults: new { area = "Admin", controller = "Account", action = "AccessDenied" }
                     );
                 routes.MapRoute(
-                    name: "default",
-                    template: "{controller=Account}/{action=Create}",
-                    defaults: new { area = "Admin" }
+                    name: "CreateAccount",
+                    template: "Account/Create",
+                    defaults: new { area = "Admin", controller = "Account", action="Create"}
+                    );
+                routes.MapRoute(
+                    name:"default",
+                    template:"{controller=Course}/{action=Index}",
+                    defaults: new {area="Faculty"}
                     );
             });
             SeedData.Populate(app);

@@ -22,3 +22,39 @@ E:\Web Dev\CourseHelperBasicVersion\CourseHelperBasicVersion\obj\Debug\netcoreap
 E:\Web Dev\CourseHelperBasicVersion\CourseHelperBasicVersion\obj\Debug\netcoreapp2.0\CourseHelperBasicVersion.AssemblyInfo.cs
 E:\Web Dev\CourseHelperBasicVersion\CourseHelperBasicVersion\obj\Debug\netcoreapp2.0\CourseHelperBasicVersion.dll
 E:\Web Dev\CourseHelperBasicVersion\CourseHelperBasicVersion\obj\Debug\netcoreapp2.0\CourseHelperBasicVersion.pdb
+J:\COMP229\aaa-group\CourseHelper\CourseHelperBasicVersion\bin\Debug\netcoreapp2.0\CourseHelperBasicVersion.deps.json
+J:\COMP229\aaa-group\CourseHelper\CourseHelperBasicVersion\bin\Debug\netcoreapp2.0\CourseHelperBasicVersion.runtimeconfig.json
+J:\COMP229\aaa-group\CourseHelper\CourseHelperBasicVersion\bin\Debug\netcoreapp2.0\CourseHelperBasicVersion.runtimeconfig.dev.json
+J:\COMP229\aaa-group\CourseHelper\CourseHelperBasicVersion\bin\Debug\netcoreapp2.0\CourseHelperBasicVersion.dll
+J:\COMP229\aaa-group\CourseHelper\CourseHelperBasicVersion\bin\Debug\netcoreapp2.0\CourseHelperBasicVersion.pdb
+J:\COMP229\aaa-group\CourseHelper\CourseHelperBasicVersion\obj\Debug\netcoreapp2.0\CourseHelperBasicVersion.csprojAssemblyReference.cache
+J:\COMP229\aaa-group\CourseHelper\CourseHelperBasicVersion\obj\Debug\netcoreapp2.0\CourseHelperBasicVersion.csproj.CoreCompileInputs.cache
+J:\COMP229\aaa-group\CourseHelper\CourseHelperBasicVersion\obj\Debug\netcoreapp2.0\UserSecretsAssemblyInfo.cs
+J:\COMP229\aaa-group\CourseHelper\CourseHelperBasicVersion\obj\Debug\netcoreapp2.0\CourseHelperBasicVersion.AssemblyInfoInputs.cache
+J:\COMP229\aaa-group\CourseHelper\CourseHelperBasicVersion\obj\Debug\netcoreapp2.0\CourseHelperBasicVersion.AssemblyInfo.cs
+J:\COMP229\aaa-group\CourseHelper\CourseHelperBasicVersion\obj\Debug\netcoreapp2.0\CourseHelperBasicVersion.dll
+J:\COMP229\aaa-group\CourseHelper\CourseHelperBasicVersion\obj\Debug\netcoreapp2.0\CourseHelperBasicVersion.pdb
+E:\COMP229\aaa-group\CourseHelper\CourseHelperBasicVersion\bin\Debug\netcoreapp2.0\CourseHelperBasicVersion.deps.json
+E:\COMP229\aaa-group\CourseHelper\CourseHelperBasicVersion\bin\Debug\netcoreapp2.0\CourseHelperBasicVersion.runtimeconfig.json
+E:\COMP229\aaa-group\CourseHelper\CourseHelperBasicVersion\bin\Debug\netcoreapp2.0\CourseHelperBasicVersion.runtimeconfig.dev.json
+E:\COMP229\aaa-group\CourseHelper\CourseHelperBasicVersion\bin\Debug\netcoreapp2.0\CourseHelperBasicVersion.dll
+E:\COMP229\aaa-group\CourseHelper\CourseHelperBasicVersion\bin\Debug\netcoreapp2.0\CourseHelperBasicVersion.pdb
+E:\COMP229\aaa-group\CourseHelper\CourseHelperBasicVersion\obj\Debug\netcoreapp2.0\CourseHelperBasicVersion.csprojResolveAssemblyReference.cache
+E:\COMP229\aaa-group\CourseHelper\CourseHelperBasicVersion\obj\Debug\netcoreapp2.0\CourseHelperBasicVersion.csproj.CoreCompileInputs.cache
+E:\COMP229\aaa-group\CourseHelper\CourseHelperBasicVersion\obj\Debug\netcoreapp2.0\UserSecretsAssemblyInfo.cs
+E:\COMP229\aaa-group\CourseHelper\CourseHelperBasicVersion\obj\Debug\netcoreapp2.0\CourseHelperBasicVersion.AssemblyInfoInputs.cache
+E:\COMP229\aaa-group\CourseHelper\CourseHelperBasicVersion\obj\Debug\netcoreapp2.0\CourseHelperBasicVersion.AssemblyInfo.cs
+E:\COMP229\aaa-group\CourseHelper\CourseHelperBasicVersion\obj\Debug\netcoreapp2.0\CourseHelperBasicVersion.dll
+E:\COMP229\aaa-group\CourseHelper\CourseHelperBasicVersion\obj\Debug\netcoreapp2.0\CourseHelperBasicVersion.pdb
+D:\COMP229\aaa-group\CourseHelper\CourseHelperBasicVersion\bin\Debug\netcoreapp2.0\CourseHelperBasicVersion.deps.json
+D:\COMP229\aaa-group\CourseHelper\CourseHelperBasicVersion\bin\Debug\netcoreapp2.0\CourseHelperBasicVersion.runtimeconfig.json
+D:\COMP229\aaa-group\CourseHelper\CourseHelperBasicVersion\bin\Debug\netcoreapp2.0\CourseHelperBasicVersion.runtimeconfig.dev.json
+D:\COMP229\aaa-group\CourseHelper\CourseHelperBasicVersion\bin\Debug\netcoreapp2.0\CourseHelperBasicVersion.dll
+D:\COMP229\aaa-group\CourseHelper\CourseHelperBasicVersion\bin\Debug\netcoreapp2.0\CourseHelperBasicVersion.pdb
+D:\COMP229\aaa-group\CourseHelper\CourseHelperBasicVersion\obj\Debug\netcoreapp2.0\CourseHelperBasicVersion.csprojAssemblyReference.cache
+D:\COMP229\aaa-group\CourseHelper\CourseHelperBasicVersion\obj\Debug\netcoreapp2.0\CourseHelperBasicVersion.csproj.CoreCompileInputs.cache
+D:\COMP229\aaa-group\CourseHelper\CourseHelperBasicVersion\obj\Debug\netcoreapp2.0\UserSecretsAssemblyInfo.cs
+D:\COMP229\aaa-group\CourseHelper\CourseHelperBasicVersion\obj\Debug\netcoreapp2.0\CourseHelperBasicVersion.AssemblyInfoInputs.cache
+D:\COMP229\aaa-group\CourseHelper\CourseHelperBasicVersion\obj\Debug\netcoreapp2.0\CourseHelperBasicVersion.AssemblyInfo.cs
+D:\COMP229\aaa-group\CourseHelper\CourseHelperBasicVersion\obj\Debug\netcoreapp2.0\CourseHelperBasicVersion.dll
+D:\COMP229\aaa-group\CourseHelper\CourseHelperBasicVersion\obj\Debug\netcoreapp2.0\CourseHelperBasicVersion.pdb

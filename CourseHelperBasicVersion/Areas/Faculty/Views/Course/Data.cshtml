@@ -17,12 +17,7 @@
     <a class="btn btn-primary ml-3 mb-3" asp-action="Manage" asp-route-courseCode="@Model.Code">Add Students</a>
 </form>
 <br />
-<div class="content-container">
-    @if (Model.CourseStudents.Count() != 0)
-    {
-        @Html.Partial("StudentTable", Model.Students)
-    }
-</div>
+
 
 <div class="modal fade" id="deleteConfirmation" tabindex="-1">
     <div class="modal-dialog modal-dialog-centered">

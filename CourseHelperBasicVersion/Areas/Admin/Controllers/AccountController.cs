@@ -61,6 +61,7 @@ namespace CourseHelperBasicVersion.Areas.Admin.Controllers
                     if (facultyResult.Succeeded)
                     {
                         await userManager.AddToRoleAsync(facultyUser, "Faculty");
+                        TempData["successMessage"] = $"Faculty {facultyUser.UserName} successfully created.";
                         return RedirectToAction(nameof(List));
                     }
                     else
@@ -98,6 +99,7 @@ namespace CourseHelperBasicVersion.Areas.Admin.Controllers
                         };
                         studentDB.SaveStudent(student);
                         await userManager.AddToRoleAsync(studentUser, "Student");
+                        TempData["successMessage"] = $"Student {studentUser.UserName} successfully created.";
                         return RedirectToAction(nameof(Login));
                     }
                     else
@@ -112,34 +114,6 @@ namespace CourseHelperBasicVersion.Areas.Admin.Controllers
             return View(userModel);
         }
 
-        [HttpPost]
-        [Authorize(Roles = "Admin")]
-        public async Task<IActionResult> CreateFaculty(UserModel userModel)
-        {
-            if (ModelState.IsValid)
-            {
-                CourseHelperUser user = new CourseHelperUser
-                {
-                    FirstName = userModel.FirstName,
-                    LastName = userModel.LastName,
-                    UserName = userModel.UserName
-                };
-                IdentityResult result = await userManager.CreateAsync(user, userModel.Password);
-                if (result.Succeeded)
-                {
-                    await userManager.AddToRoleAsync(user, "Faculty");
-                    return RedirectToAction(nameof(Login));
-                }
-                else
-                {
-                    foreach (IdentityError error in result.Errors)
-                    {
-                        ModelState.AddModelError("", error.Description);
-                    }
-                }
-            }
-            return View(userModel);
-        }
 
         [Authorize(Roles = "Admin")]
         public IActionResult List()
@@ -164,6 +138,7 @@ namespace CourseHelperBasicVersion.Areas.Admin.Controllers
                 IdentityResult result = await userManager.DeleteAsync(user);
                 if (result.Succeeded)
                 {
+                    TempData["successMessage"] = $"Account {user.UserName} successfully deleted.";
                     return RedirectToAction(nameof(List));
                 }
                 else
@@ -173,8 +148,7 @@ namespace CourseHelperBasicVersion.Areas.Admin.Controllers
             }
             else
             {
-                //Need tempdata implementation
-                //ModelState.AddModelError("", "User Not Found");
+                TempData["errorMessage"] = $"Account not found.";
             }
             return View("List", userManager.Users);
         }
@@ -189,7 +163,7 @@ namespace CourseHelperBasicVersion.Areas.Admin.Controllers
             }
             else
             {
-                //Need tempdata impementation
+                TempData["errorMessage"] = $"Account not found.";
                 return RedirectToAction("List");
             }
         }
@@ -234,7 +208,7 @@ namespace CourseHelperBasicVersion.Areas.Admin.Controllers
                             student.LastName = user.LastName;
                             studentDB.SaveStudent(student);
                         }
-                        //Need tempdata impementation
+                        TempData["successMessage"] = $"Account {user.UserName} successfully updated.";
                         return RedirectToAction("List");
                     }
                     else
@@ -245,8 +219,7 @@ namespace CourseHelperBasicVersion.Areas.Admin.Controllers
             }
             else
             {
-                //Need tempdata implementation
-                ModelState.AddModelError("", "User Not Found");
+                TempData["errorMessage"] = $"Account not found.";
             }
             return View(user);
         }
@@ -261,7 +234,7 @@ namespace CourseHelperBasicVersion.Areas.Admin.Controllers
             }
             else
             {
-                //Need tempdata impementation
+                TempData["errorMessage"] = $"Account not found.";
                 return RedirectToAction("List");
             }
         }
@@ -276,7 +249,7 @@ namespace CourseHelperBasicVersion.Areas.Admin.Controllers
                 IdentityResult changePass = await userManager.ChangePasswordAsync(user, oldPassword, newPassword);
                 if (changePass.Succeeded)
                 {
-                    //Need tempdata implementation
+                    TempData["successMessage"] = $"Password successfully changed.";
                     return RedirectToAction("Home", "Student");
                 }
                 else
@@ -286,8 +259,7 @@ namespace CourseHelperBasicVersion.Areas.Admin.Controllers
             }
             else
             {
-                //Need tempdata implementation
-                ModelState.AddModelError("", "User Not Found");
+                TempData["errorMessage"] = $"Account not found.";
             }
             return View("ChangePassword", id);
         }
@@ -313,10 +285,11 @@ namespace CourseHelperBasicVersion.Areas.Admin.Controllers
                     Microsoft.AspNetCore.Identity.SignInResult result = await signInManager.PasswordSignInAsync(user, model.Password, false, false);
                     if (result.Succeeded)
                     {
+                        TempData["successMessage"] = $"Successfully logged in.";
                         return Redirect(returnURL ?? "/");
                     }
                 }
-                ModelState.AddModelError(nameof(LoginModel.UserName), "Invalid user or password");
+                TempData["errorMessage"] = $"Invalid user or password.";
             }
             return View(model);
         }
@@ -326,6 +299,7 @@ namespace CourseHelperBasicVersion.Areas.Admin.Controllers
         public async Task<IActionResult> Logout(string returnURL)
         {
             await signInManager.SignOutAsync();
+            TempData["successMessage"] = $"Successfully logged out.";
             return Redirect(returnURL ?? "/");
 
         }
@@ -333,9 +307,11 @@ namespace CourseHelperBasicVersion.Areas.Admin.Controllers
         [AllowAnonymous]
         public IActionResult AccessDenied()
         {
+            TempData["successMessage"] = $"You do not have permission to access this page.";
             return View("AccessDenied");
         }
 
+        [NonAction]
         private void AddErrorsFromResult(IdentityResult result)
         {
             foreach (IdentityError error in result.Errors)

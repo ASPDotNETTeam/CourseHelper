@@ -1,0 +1,16 @@
+﻿@model IdentityInfo
+
+@if (Model.Name != null)
+{
+    <ul class="navbar-links">
+        <li>@Model.Name</li>
+        <li><a asp-action="Logout" asp-controller="Account" asp-area="Admin"><span>Logout</span></a></li>
+    </ul>
+}
+else
+{
+    <ul class="navbar-links">
+        <li><a asp-action="Login" asp-controller="Account" asp-area="Admin">Login</a></li>
+        <li><a asp-action="Create" asp-controller="Account" asp-area="Admin">Register</a></li>
+    </ul>
+}
