@@ -69,7 +69,7 @@ namespace CourseHelperBasicVersion
                     );
                 routes.MapRoute(
                     name: "",
-                    template: "General/Manage/{courseCode}",
+                    template: "Faculty/Manage/{courseCode}",
                     defaults: new { controller = "Course", action = "Manage", area = "Faculty" }
                     );
                 routes.MapRoute(
