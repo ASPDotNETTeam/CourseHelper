@@ -1,0 +1,59 @@
+﻿@model IEnumerable<Course>
+@{
+    ViewBag.Title = "Course List";
+    ViewBag.Active = "MyCourses";
+}
+
+<div class="title-header">
+    <h2>List of Courses</h2>
+</div>
+<div class="content-container">
+    <form class="form-inline">
+        <input class="form-control mr-sm-2 mb-3" type="search" placeholder="Search">
+        <button class="btn btn-info mb-3">Search</button>
+    </form>
+    @Html.Partial("CourseTable", Model)
+    <a class="btn btn-primary mb-3 ml-3" id="dropButton" asp-action="Drop">Drop Course</a>
+    <a class="btn btn-primary mb-3 ml-3" id="feedbackButton" asp-action="ReviewForm">Add Course Review</a>
+</div>
+
+<script>
+    var dropHref = $('#dropButton').attr('href');
+    var feedbackHref = $('#feedbackButton').attr('href');
+    var href;
+    var isHidden = true;
+    //deals with clicks on course rows (highlighting selected rows)
+    $('td.content-col').click(function () {
+        //removes previously highlighted row
+        if ($(this).parent().hasClass('selected')) {
+            $(this).parent().removeClass('selected');
+            $('#dropButton').attr('href', dropHref);
+            $('#feedbackButton').attr('href', feedbackHref);
+        } else {
+            $('tr.content-row').removeClass('selected');
+            $(this).parent().addClass('selected');
+            // configures Drop course button href to course code of selected row
+            href = dropHref + "/" + $(this).parent().children(':nth-child(2)').text();
+            $('#dropButton').attr('href', href);
+            // configures feedback button href to course code of selected row
+            href = feedbackHref + "/" + $(this).parent().children(':nth-child(2)').text();
+            $('#feedbackButton').attr('href', href);
+        }
+    });
+    //toggles list of students for a course row
+    $('.fa-chevron-down').click(function () {
+        if (isHidden) {
+            $(this).addClass('fa-chevron-up');
+            $(this).removeClass('fa-chevron-down');
+            var classCode = $(this).parent().siblings().eq(1).text();
+            $('.courseId_' + classCode).removeClass('hidden-row');
+            isHidden = false;
+        } else {
+            $(this).addClass('fa-chevron-down');
+            $(this).removeClass('fa-chevron-up');
+            var classCode = $(this).parent().siblings().eq(1).text();
+            $('.courseId_' + classCode).addClass('hidden-row');
+            isHidden = true;
+        }
+    });
+</script>

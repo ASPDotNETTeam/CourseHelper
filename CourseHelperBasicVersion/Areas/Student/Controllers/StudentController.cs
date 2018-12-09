@@ -1,26 +1,28 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using CourseHelperBasicVersion.Models;
-using CourseHelperBasicVersion.Models.ViewModels;
-using Microsoft.AspNetCore.Http;
+using CourseHelperBasicVersion.Models.Database;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CourseHelper.Controllers
 {
     [Area("Student")]
+    [Authorize(Roles = "Student")]
     public class StudentController : Controller
     {
         private ICourseDatabase courseDB;
         private IStudentDatabase studentDB;
         private ICourseStudentDatabase csDB;
+        private IReviewDatabase reviewDB;
 
-        public StudentController(ICourseDatabase courseDB, IStudentDatabase studentDB, ICourseStudentDatabase csDB)
+        public StudentController(ICourseDatabase courseDB, IStudentDatabase studentDB, ICourseStudentDatabase csDB, IReviewDatabase reviewDB)
         {
             this.courseDB = courseDB;
             this.studentDB = studentDB;
             this.csDB = csDB;
+            this.reviewDB = reviewDB;
         }
 
         public IActionResult Index()
@@ -30,129 +32,121 @@ namespace CourseHelper.Controllers
 
         public IActionResult DisplayCourses()
         {
-            return View(courseDB.Courses);
+            return View("Display",courseDB.Courses);
         }
 
-    //    public IActionResult Create()
-    //    {
-    //        return View("Insert", new Course());
-    //    }
+        public IActionResult Enrol(string courseCode)
+        {
+            if (courseCode == null)
+            {
+                TempData["errorMessage"] = "You have to select a course to add student!";
+                return RedirectToAction(nameof(DisplayCourses));
+            }
+            Course course = courseDB.Courses.FirstOrDefault(c => c.Code.ToUpper() == courseCode.ToUpper());
+            if (course == null)
+            {
+                TempData["errorMessage"] = "Please select a valid course";
+                return RedirectToAction(nameof(DisplayCourses));
+            }
+            // get student info from the identity info
+            string userName = User.Identity.Name.ToString();
+            Student student = studentDB.Students.FirstOrDefault(s => s.FirstName == userName);
+            if(student == null)
+            {
+                TempData["errorMessage"] = "no student data found";
+                return RedirectToAction(nameof(DisplayCourses));
+            }
+            if (course.Students.Contains(student))
+            {
+                TempData["errorMessage"] = "You already enrolled this course";
+                return RedirectToAction(nameof(MyCourses));
+            }
+            if (!course.Students.Contains(student))
+            {
+                CourseStudent csdb = course.AddStudent(student);
+                studentDB.SaveStudent(student);
+                csDB.AddCourseStudents(csdb);
+                courseDB.SaveCourse(course);
+                TempData["successMessage"] = $"Enrollment completed! You have added to course {courseCode}";
+                return RedirectToAction(nameof(MyCourses));
+            }
+            return RedirectToAction(nameof(DisplayCourses));
+        }
 
-    //    [HttpPost]
-    //    public IActionResult Create(Course course)
-    //    {
-    //        if (ModelState.IsValid)
-    //        {
-    //            courseDB.SaveCourse(course);
-    //            return RedirectToAction(nameof(Display));
-    //        }
-    //        else
-    //        {
-    //            return View("Insert", course);
-    //        }
-    //    }
+        public IActionResult MyCourses()
+        {
+            string userName = User.Identity.Name.ToString();
+            Student student = studentDB.Students.FirstOrDefault(s => s.FirstName == userName);
+            if (student == null)
+            {
+                TempData["errorMessage"] = "no student data found";
+                return RedirectToAction(nameof(DisplayCourses));
+            }
+            return View(courseDB.Courses.Select(c => c.Students.Contains(student)));
+        }
 
-    //    public IActionResult Edit(string courseCode)
-    //    {
-    //        if (courseCode == null)
-    //        {
-    //            return RedirectToAction(nameof(Display));
-    //        }
-    //        Course course = courseDB.Courses.FirstOrDefault(c => c.Code.ToUpper() == courseCode.ToUpper());
-    //        if (course == null)
-    //        {
-    //            return RedirectToAction(nameof(Display));
-    //        }
-    //        return View("Data", course);
-    //    }
+        public IActionResult Drop(string courseCode)
+        {
+            if (courseCode == null)
+            {
+                TempData["errorMessage"] = "You have to select a course to add student!";
+                return RedirectToAction(nameof(DisplayCourses));
+            }
+            Course course = courseDB.Courses.FirstOrDefault(c => c.Code.ToUpper() == courseCode.ToUpper());
+            if (course == null)
+            {
+                TempData["errorMessage"] = "Please select a valid course";
+                return RedirectToAction(nameof(DisplayCourses));
+            }
+            string userName = User.Identity.Name.ToString();
+            Student student = studentDB.Students.FirstOrDefault(s => s.FirstName == userName);
+            if (student == null)
+            {
+                TempData["errorMessage"] = "no student data found";
+                return RedirectToAction(nameof(DisplayCourses));
+            }
+            // drop student from the course
+            // TempData["successMessage"] = "Course successfully dropped";
+            return RedirectToAction(nameof(MyCourses));
+        }
 
-    //    [HttpPost]
-    //    public IActionResult Edit(Course course)
-    //    {
-    //        if (ModelState.IsValid)
-    //        {
-    //            courseDB.SaveCourse(course);
-    //            return RedirectToAction(nameof(Display));
-    //        }
-    //        else
-    //        {
-    //            return View("Data", course);
-    //        }
-    //    }
+        public IActionResult ReviewForm(string courseCode)
+        {
+            if (courseCode == null)
+            {
+                TempData["errorMessage"] = "You have to select a course to add student!";
+                return RedirectToAction(nameof(DisplayCourses));
+            }
+            Course course = courseDB.Courses.FirstOrDefault(c => c.Code.ToUpper() == courseCode.ToUpper());
+            if (course == null)
+            {
+                TempData["errorMessage"] = "Please select a valid course";
+                return RedirectToAction(nameof(DisplayCourses));
+            }
+            Review review = new Review() { CourseCode = courseCode, CourseName = course.Name};
+            return View(review);
+        }
 
-    //    public IActionResult Manage(string courseCode)
-    //    {
-    //        if (courseCode == null)
-    //        {
-    //            return RedirectToAction(nameof(Display));
-    //        }
-    //        Course course = courseDB.Courses.FirstOrDefault(c => c.Code.ToUpper() == courseCode.ToUpper());
-    //        if (course == null)
-    //        {
-    //            return RedirectToAction(nameof(Display));
-    //        }
-    //        EnrollmentInfo enrollInfo = CreateEnrollInfo(course);
-    //        return View("User", enrollInfo);
-    //    }
+        public IActionResult ReviewList()
+        {
+            return View(reviewDB.Reviews);
+        }
 
-    //    [HttpPost]
-    //    public IActionResult Manage(EnrollmentList list)
-    //    {
-    //        Course course = courseDB.Courses.FirstOrDefault(c => c.CourseId == list.CourseID);
-    //        if (course != null)
-    //        {
-    //            if (ModelState.IsValid)
-    //            {
-    //                foreach (long i in list.EnrollQueue)
-    //                {
-    //                    Student student = studentDB.Students.FirstOrDefault(s => s.StudentNumber == i);
-    //                    CourseStudent csdb = course.AddStudent(student);
-    //                    studentDB.SaveStudent(student);
-    //                    csDB.AddCourseStudents(csdb);
-    //                }
-    //                courseDB.SaveCourse(course);
-    //                return RedirectToAction(nameof(Display));
-    //            }
-    //            else
-    //            {
-    //                EnrollmentInfo enrollInfo = CreateEnrollInfo(course);
-    //                return View("User", enrollInfo);
-    //            }
-    //        }
-    //        else
-    //        {
-    //            return RedirectToAction(nameof(Display));
-    //        }
-    //    }
-
-    //    [HttpPost]
-    //    public IActionResult Delete(int courseID)
-    //    {
-    //        Course deletedCourse = courseDB.DeleteCourse(courseID);
-    //        if (deletedCourse != null)
-    //        {
-    //            //TODO: Confirmation of deletion (ViewData?)
-    //        }
-    //        return RedirectToAction(nameof(Display));
-    //    }
-
-    //    [NonAction]
-    //    private EnrollmentInfo CreateEnrollInfo(Course course)
-    //    {
-    //        ICollection<Student> unenrolledStudents = new List<Student>();
-    //        ICollection<Student> enrolledStudents = new List<Student>();
-    //        foreach (Student dbStudent in studentDB.Students)
-    //        {
-    //            if (course.Students.Contains(dbStudent))
-    //            {
-    //                enrolledStudents.Add(dbStudent);
-    //            }
-    //            else
-    //            {
-    //                unenrolledStudents.Add(dbStudent);
-    //            }
-    //        }
-    //        return new EnrollmentInfo() { Course = course, EnrolledStudents = enrolledStudents, UnenrolledStudents = unenrolledStudents };
-    //    }
+        [HttpPost]
+        public IActionResult ReviewList(Review review)
+        {
+            if (review.CreatorName == "true")
+            {
+                review.CreatorName = User.Identity.Name.ToString();
+            }
+            else if (review.CreatorName == "false")
+            {
+                review.CreatorName = "Anonymous";
+            }
+            review.CreateTime = DateTime.Now;
+            reviewDB.SavaReview(review);
+            TempData["successMessage"] = "Review successfully submitted";
+            return View(reviewDB.Reviews);
+        }
     }
 }

@@ -1,0 +1,53 @@
+﻿@model IEnumerable<Course>
+@{
+    ViewBag.Title = "Course List";
+    ViewBag.Active = "Display";
+}
+
+<div class="title-header">
+    <h2>List of Courses</h2>
+</div>
+<div class="content-container">
+    <form class="form-inline">
+        <input class="form-control mr-sm-2 mb-3" type="search" placeholder="Search">
+        <button class="btn btn-info mb-3">Search</button>
+    </form>
+    @Html.Partial("CourseTable", Model)
+    <a class="btn btn-primary mb-3 ml-3" id="enrolButton" asp-action="Enrol">Enrol Course</a>
+</div>
+
+<script>
+    var enrolHref = $('#enrolButton').attr('href');
+    var href;
+    var isHidden = true;
+    //deals with clicks on course rows (highlighting selected rows)
+    $('td.content-col').click(function () {
+        //removes previously highlighted row
+        if ($(this).parent().hasClass('selected')) {
+            $(this).parent().removeClass('selected');
+            $('#enrolButton').attr('href', enrolHref);
+        } else {
+            $('tr.content-row').removeClass('selected');
+            $(this).parent().addClass('selected');
+            // configures student enrollment button href to course code of selected row
+            href = enrolHref + "/" + $(this).parent().children(':nth-child(2)').text();
+            $('#enrolButton').attr('href', href);
+        }
+    });
+    //toggles list of students for a course row
+    $('.fa-chevron-down').click(function () {
+        if (isHidden) {
+            $(this).addClass('fa-chevron-up');
+            $(this).removeClass('fa-chevron-down');
+            var classCode = $(this).parent().siblings().eq(1).text();
+            $('.courseId_' + classCode).removeClass('hidden-row');
+            isHidden = false;
+        } else {
+            $(this).addClass('fa-chevron-down');
+            $(this).removeClass('fa-chevron-up');
+            var classCode = $(this).parent().siblings().eq(1).text();
+            $('.courseId_' + classCode).addClass('hidden-row');
+            isHidden = true;
+        }
+    });
+</script>

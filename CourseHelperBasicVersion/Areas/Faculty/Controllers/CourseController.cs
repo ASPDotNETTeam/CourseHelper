@@ -112,7 +112,6 @@ namespace CourseHelper.Controllers
         }
 
         [HttpPost]
-        
         public IActionResult Manage(EnrollmentList list)
         {
             Course course = courseDB.Courses.FirstOrDefault(c => c.CourseId == list.CourseID);

@@ -11,9 +11,10 @@ using System;
 namespace CourseHelperBasicVersion.Migrations
 {
     [DbContext(typeof(CourseHelperDBContext))]
-    partial class CourseHelperDBContextModelSnapshot : ModelSnapshot
+    [Migration("20181209011229_Reviews")]
+    partial class Reviews
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

@@ -46,6 +46,14 @@ namespace CourseHelperBasicVersion.Models.Data
                 await userManager.CreateAsync(userFaculty, "password");
                 await userManager.AddToRoleAsync(userFaculty, "Faculty");
             }
+
+            CourseHelperUser userStudent = await userManager.FindByNameAsync("student");
+            if(userStudent == null)
+            {
+                userStudent = new CourseHelperUser() { UserName = "student" };
+                await userManager.CreateAsync(userStudent, "password");
+                await userManager.AddToRoleAsync(userStudent, "Student");
+            }
         }
     }
 }

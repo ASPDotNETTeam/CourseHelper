@@ -11,6 +11,7 @@ namespace CourseHelperBasicVersion.Models
         }
         public DbSet<Course> Courses { get; set; }
         public DbSet<Student> Students { get; set; }
+        public DbSet<Review> Reviews { get; set; }
         public DbSet<CourseStudent> CourseStudents { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
