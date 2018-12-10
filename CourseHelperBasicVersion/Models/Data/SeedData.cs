@@ -43,5 +43,13 @@ namespace CourseHelperBasicVersion.Models
                 new Student { StudentNumber = 300745442, FirstName = "Dill", LastName = "Harris", Semester = 2, Status = STUDENT_STATUS.UNPAID, IsRegistered = false }
                 );
         }
+
+        private static void addSeedReviews(CourseHelperDBContext context)
+        {
+            context.Reviews.AddRange(
+                new Review { CourseCode= "BUSN-331", CourseName= "Business Law", Semester="FALL2018", Comment="This is a great course!", CreatorName="Hang Li", CreateTime=DateTime.Now },
+                new Review { CourseCode = "COMP-106", CourseName = "Applied Business Software I", Semester = "FALL2019", Comment = "bad course", CreatorName = "Anonymous", CreateTime = DateTime.Now }
+            );
+        }
     }
 }

@@ -64,6 +64,11 @@ namespace CourseHelperBasicVersion
             app.UseAuthentication();
             app.UseMvc(routes => {
                 routes.MapRoute(
+                    name: "studentDropCourse",
+                    template: "Student/Drop/{courseCode}",
+                    defaults: new { controller = "Student", action = "Drop", area = "Student" }
+                    );
+                routes.MapRoute(
                     name: "studentReview",
                     template: "Student/ReviewForm/{courseCode}",
                     defaults: new { controller = "Student", action = "ReviewForm", area = "Student" }

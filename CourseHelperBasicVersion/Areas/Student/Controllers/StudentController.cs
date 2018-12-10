@@ -82,7 +82,7 @@ namespace CourseHelper.Controllers
                 TempData["errorMessage"] = "no student data found";
                 return RedirectToAction(nameof(DisplayCourses));
             }
-            return View(courseDB.Courses.Select(c => c.Students.Contains(student)));
+            return View(courseDB.Courses.Where(c => c.Students.Contains(student)));
         }
 
         public IActionResult Drop(string courseCode)
