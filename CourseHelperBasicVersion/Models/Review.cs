@@ -10,14 +10,18 @@ namespace CourseHelperBasicVersion.Models
     {
         public int ReviewId { get; set; }
         public string CourseName { get; set; }
-        [Required(ErrorMessage = "Please enter Course code")]
+
+        [Required(ErrorMessage = "Please enter a Course code")]
         public string CourseCode { get; set; }
-        [Required(ErrorMessage = "Please enter your semester and year")]
+
+        [Required(ErrorMessage = "Please enter your semester")]
         public string Semester { get; set; }
+
         [Required(ErrorMessage = "Please enter your comment")]
         public string Comment { get; set; }
+
         public string CreatorName { get; set; }
-        public DateTime  CreateTime{ get; set; }
+        public DateTime CreateTime { get; set; }
         
     }
 }

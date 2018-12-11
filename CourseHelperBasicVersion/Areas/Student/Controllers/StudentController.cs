@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Threading.Tasks;
 using CourseHelperBasicVersion.Models;
 using CourseHelperBasicVersion.Models.Database;
 using Microsoft.AspNetCore.Authorization;
@@ -16,23 +17,35 @@ namespace CourseHelper.Controllers
         private IStudentDatabase studentDB;
         private ICourseStudentDatabase csDB;
         private IReviewDatabase reviewDB;
+        private UserManager<CourseHelperUser> userManager;
 
-        public StudentController(ICourseDatabase courseDB, IStudentDatabase studentDB, ICourseStudentDatabase csDB, IReviewDatabase reviewDB)
+        public StudentController(ICourseDatabase courseDB, IStudentDatabase studentDB, ICourseStudentDatabase csDB, IReviewDatabase reviewDB, UserManager<CourseHelperUser> userManager)
         {
             this.courseDB = courseDB;
             this.studentDB = studentDB;
             this.csDB = csDB;
             this.reviewDB = reviewDB;
+            this.userManager = userManager;
         }
 
-        public IActionResult Index()
+        [NonAction]
+        private async Task<Student> getLoggedInStudent()
         {
+            CourseHelperUser loggedInUser = await userManager.GetUserAsync(HttpContext.User);
+            return studentDB.Students.First(s => s.StudentNumber == loggedInUser.StudentNumber);
+        }
+
+        public async Task<IActionResult> Index()
+        {
+            Student student = await getLoggedInStudent();
+            //May need to check for null values student?.LastName ?? "message"
+            TempData["errorMessage"] = student.LastName;
             return View();
         }
 
         public IActionResult DisplayCourses()
         {
-            return View("Display",courseDB.Courses);
+            return View("Display", courseDB.Courses);
         }
 
         public IActionResult Enrol(string courseCode)

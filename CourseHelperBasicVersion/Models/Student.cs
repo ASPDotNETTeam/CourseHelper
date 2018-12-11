@@ -24,6 +24,7 @@ namespace CourseHelperBasicVersion.Models
         public STUDENT_STATUS Status { get; set; }
         public Boolean IsRegistered { get; set; }
         public ICollection<CourseStudent> CourseStudents { get; set; } = new List<CourseStudent>();
+
         private IEnumerable<Course> GetCourses()
         {
             foreach (CourseStudent cs in CourseStudents)

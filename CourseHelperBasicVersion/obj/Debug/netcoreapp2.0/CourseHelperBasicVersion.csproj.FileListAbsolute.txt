@@ -58,3 +58,15 @@ D:\COMP229\aaa-group\CourseHelper\CourseHelperBasicVersion\obj\Debug\netcoreapp2
 D:\COMP229\aaa-group\CourseHelper\CourseHelperBasicVersion\obj\Debug\netcoreapp2.0\CourseHelperBasicVersion.AssemblyInfo.cs
 D:\COMP229\aaa-group\CourseHelper\CourseHelperBasicVersion\obj\Debug\netcoreapp2.0\CourseHelperBasicVersion.dll
 D:\COMP229\aaa-group\CourseHelper\CourseHelperBasicVersion\obj\Debug\netcoreapp2.0\CourseHelperBasicVersion.pdb
+S:\Downloads\CourseHelper-master\CourseHelperBasicVersion\bin\Debug\netcoreapp2.0\CourseHelperBasicVersion.deps.json
+S:\Downloads\CourseHelper-master\CourseHelperBasicVersion\bin\Debug\netcoreapp2.0\CourseHelperBasicVersion.runtimeconfig.json
+S:\Downloads\CourseHelper-master\CourseHelperBasicVersion\bin\Debug\netcoreapp2.0\CourseHelperBasicVersion.runtimeconfig.dev.json
+S:\Downloads\CourseHelper-master\CourseHelperBasicVersion\bin\Debug\netcoreapp2.0\CourseHelperBasicVersion.dll
+S:\Downloads\CourseHelper-master\CourseHelperBasicVersion\bin\Debug\netcoreapp2.0\CourseHelperBasicVersion.pdb
+S:\Downloads\CourseHelper-master\CourseHelperBasicVersion\obj\Debug\netcoreapp2.0\CourseHelperBasicVersion.csprojAssemblyReference.cache
+S:\Downloads\CourseHelper-master\CourseHelperBasicVersion\obj\Debug\netcoreapp2.0\CourseHelperBasicVersion.csproj.CoreCompileInputs.cache
+S:\Downloads\CourseHelper-master\CourseHelperBasicVersion\obj\Debug\netcoreapp2.0\UserSecretsAssemblyInfo.cs
+S:\Downloads\CourseHelper-master\CourseHelperBasicVersion\obj\Debug\netcoreapp2.0\CourseHelperBasicVersion.AssemblyInfoInputs.cache
+S:\Downloads\CourseHelper-master\CourseHelperBasicVersion\obj\Debug\netcoreapp2.0\CourseHelperBasicVersion.AssemblyInfo.cs
+S:\Downloads\CourseHelper-master\CourseHelperBasicVersion\obj\Debug\netcoreapp2.0\CourseHelperBasicVersion.dll
+S:\Downloads\CourseHelper-master\CourseHelperBasicVersion\obj\Debug\netcoreapp2.0\CourseHelperBasicVersion.pdb
