@@ -38,7 +38,7 @@ namespace CourseHelper.Controllers
         public async Task<IActionResult> Index()
         {
             Student student = await getLoggedInStudent();
-            //May need to check for null values student?.LastName ?? "message"
+            //May need/have to check for null values student?.LastName ?? "message"
             TempData["errorMessage"] = student.LastName;
             return View();
         }

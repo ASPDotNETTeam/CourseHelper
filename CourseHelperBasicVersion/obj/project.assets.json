@@ -13539,11 +13539,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "S:\\Downloads\\CourseHelper-master\\CourseHelperBasicVersion\\CourseHelperBasicVersion.csproj",
+      "projectUniqueName": "S:\\Downloads\\CourseHelper-master\\CourseHelper\\CourseHelperBasicVersion\\CourseHelperBasicVersion.csproj",
       "projectName": "CourseHelperBasicVersion",
-      "projectPath": "S:\\Downloads\\CourseHelper-master\\CourseHelperBasicVersion\\CourseHelperBasicVersion.csproj",
+      "projectPath": "S:\\Downloads\\CourseHelper-master\\CourseHelper\\CourseHelperBasicVersion\\CourseHelperBasicVersion.csproj",
       "packagesPath": "C:\\Users\\Frank\\.nuget\\packages\\",
-      "outputPath": "S:\\Downloads\\CourseHelper-master\\CourseHelperBasicVersion\\obj\\",
+      "outputPath": "S:\\Downloads\\CourseHelper-master\\CourseHelper\\CourseHelperBasicVersion\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
