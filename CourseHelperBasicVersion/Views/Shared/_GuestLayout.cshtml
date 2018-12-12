@@ -1,0 +1,51 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="~/lib/bootstrap/css/bootstrap.css" />
+    <link rel="stylesheet" href="~/lib/font-awesome/css/font-awesome.css" />
+    <link rel="stylesheet" href="~/css/main.css" type="text/css" />
+    <script src="~/lib/jquery/jquery.js"></script>
+    <script src="~/lib/bootstrap/js/bootstrap.bundle.js"></script>
+    <script src="~/js/navigation.js"></script>
+    <title>@ViewBag.Title</title>
+    <script>$(document).ready(function () {
+            $('.navbar-vertical').hide();
+            $('.navbar-vertical').show();
+            $('.wrapper').hide();
+            $('.wrapper').show();
+        });
+    </script>
+</head>
+<body>
+    <nav>
+        <div class="navbar-vertical">
+            <a asp-action="Index"><img src="~/images/logo-black.png" width="130" height="100" class="content-logo" /></a>
+            <ul class="navbar-links">
+                @await Component.InvokeAsync(nameof(IdentitySummary))
+                <li @(ViewBag.Active == "Home" ? "class=active" : "")><a asp-action="Index" asp-controller="Guest" asp-area="Guest"><span>Home</span></a></li>
+            </ul>
+            <div class="navbar-footer">
+                
+                <a href="https://github.com/ASPDotNETTeam/CourseHelper"><i class="fa fa-github" style="font-size:30px;color:white"></i></a>
+                <a href="https://www.facebook.com/aCourseHelper/"><i class="fa fa-facebook" style="font-size:30px;color:white"></i></a>
+                <a href="https://www.twitter.com/aCourseHelper/"><i class="fa fa-twitter" style="font-size:30px;color:white"></i></a>
+                <a href="https://www.youtube.com/aCourseHelper/"><i class="fa fa-youtube-play" style="font-size:30px;color:white"></i></a>
+            </div>
+        </div>
+    </nav>
+    <div class="wrapper">
+        @if (TempData["errorMessage"] != null)
+        {
+            <div class="alert alert-danger text-center">@TempData["errorMessage"]</div>
+        }
+        else if (TempData["successMessage"] != null)
+        {
+            <div class="alert alert-success text-center">@TempData["successMessage"]</div>
+        }
+        <div class="navbar-menu"><i class="fa fa-bars nav-button"></i></div>
+        @RenderBody()
+    </div>
+</body>
+</html>

@@ -71,10 +71,7 @@ namespace CourseHelperBasicVersion.Areas.Admin.Controllers
                     }
                     else
                     {
-                        foreach (IdentityError error in facultyResult.Errors)
-                        {
-                            ModelState.AddModelError("", error.Description);
-                        }
+                        AddErrorsFromResult(facultyResult);
                     }
                 }
                 else
@@ -109,10 +106,7 @@ namespace CourseHelperBasicVersion.Areas.Admin.Controllers
                     }
                     else
                     {
-                        foreach (IdentityError error in studentResult.Errors)
-                        {
-                            ModelState.AddModelError("", error.Description);
-                        }
+                        AddErrorsFromResult(studentResult);
                     }
                 }
             }
@@ -294,15 +288,15 @@ namespace CourseHelperBasicVersion.Areas.Admin.Controllers
                         string indexUrl = "/";
                         if (await userManager.IsInRoleAsync(user, "Admin"))
                         {
-                            indexUrl = "/admin";
+                            indexUrl = "/Admin";
                         }
                         else if (await userManager.IsInRoleAsync(user, "Faculty"))
                         {
-                            indexUrl = "/faculty";
+                            indexUrl = "/Faculty";
                         }
                         else if (await userManager.IsInRoleAsync(user, "Student"))
                         {
-                            indexUrl = "/student";
+                            indexUrl = "/Student";
                         }
                         return Redirect(returnURL ?? indexUrl);
                     }
@@ -319,13 +313,12 @@ namespace CourseHelperBasicVersion.Areas.Admin.Controllers
             await signInManager.SignOutAsync();
             TempData["successMessage"] = $"Successfully logged out.";
             return Redirect(returnURL ?? "/");
-
         }
 
         [AllowAnonymous]
         public IActionResult AccessDenied()
         {
-            TempData["successMessage"] = $"You do not have permission to access this page.";
+            TempData["errorMessage"] = $"Insufficient permission: Access Denied.";
             return View("AccessDenied");
         }
 

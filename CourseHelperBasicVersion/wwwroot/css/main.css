@@ -160,10 +160,26 @@ label {
     display: none;
 }
 
+.text-center {
+    text-align: center;
+}
+
+.font-mini-20 {
+    font-size: 20px;
+}
+
+.font-mini-16 {
+    font-size: 16px;
+}
+
 /* main page gallery */
 .gallery {
     width: 100%;
     height: 500px;
+}
+
+.font-white {
+    color: white;
 }
 
 /* mobile */

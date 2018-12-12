@@ -1,0 +1,19 @@
+﻿@model Course
+@{
+    ViewBag.Title = "Create a Course";
+    ViewBag.Active = "Create";
+}
+
+<div class="title-header">
+    <h2>Create a Course</h2>
+</div>
+
+<div class="content-container">
+    <form class="insert-form" asp-action="Create" method="post" novalidate>
+        @Html.Partial("CourseForm", Model)
+        <br />
+        <button class="btn btn-primary my-3 mr-3" type="submit">Create</button>
+        <a class="btn btn-secondary my-3 mr-3" asp-action="Index">Cancel</a>
+    </form>
+</div>
+

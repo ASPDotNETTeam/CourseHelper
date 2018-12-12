@@ -18,7 +18,7 @@ namespace CourseHelperBasicVersion.Models.Component
             } 
             else
             {
-               return View("IdentityInfo", new IdentityInfo());
+                return View("IdentityInfo", new IdentityInfo());
             }
         }
     }

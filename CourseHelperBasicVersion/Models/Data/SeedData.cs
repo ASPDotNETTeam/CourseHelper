@@ -25,11 +25,11 @@ namespace CourseHelperBasicVersion.Models
         private static void addSeedCourses(CourseHelperDBContext context)
         {
             context.Courses.AddRange(
-                new Course { Code = "BUSN-331", Name = "Business Law", Season = SEASON.FALL, Faculty = "Business", Description = "A study on advanced business law in Canada." },
-                new Course { Code = "COMP-106", Name = "Applied Business Software I", Season = SEASON.FALL, Faculty = "Business", Description = "Introduction to various business softwares." },
-                new Course { Code = "MKTG-222", Name = "Retailing", Season = SEASON.WINTER, Faculty = "Business", Description = "A look at the logistics of retailing and its impact on the economy." },
-                new Course { Code = "ACCT-222", Name = "Management Accounting I", Season = SEASON.FALL, Faculty = "Business", Description = "Introduction to management accounting." },
-                new Course { Code = "ECON-205", Name = "Principles of Microeconomics", Season = SEASON.WINTER, Faculty = "Business", Description = "A closer look at the scale of microeconomics." }
+                new Course { Code = "BUSN-331", Name = "Business Law", Season = SEASON.FALL, Faculty = "Business", MaxSize = 30, Description = "A study on advanced business law in Canada." },
+                new Course { Code = "COMP-106", Name = "Applied Business Software I", Season = SEASON.FALL, Faculty = "Business", MaxSize = 29, Description = "Introduction to various business softwares." },
+                new Course { Code = "MKTG-222", Name = "Retailing", Season = SEASON.WINTER, Faculty = "Business", MaxSize = 31, Description = "A look at the logistics of retailing and its impact on the economy." },
+                new Course { Code = "ACCT-222", Name = "Management Accounting I", Season = SEASON.FALL, Faculty = "Business", MaxSize = 33, Description = "Introduction to management accounting." },
+                new Course { Code = "ECON-205", Name = "Principles of Microeconomics", Season = SEASON.WINTER, Faculty = "Business", MaxSize = 20, Description = "A closer look at the scale of microeconomics." }
                 );
         }
 

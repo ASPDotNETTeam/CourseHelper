@@ -1,0 +1,41 @@
+﻿@model Course
+@{
+    ViewBag.Title = "Update Course";
+}
+
+<div class="title-header">
+    <h2>Updating Course: @Model.Name</h2>
+</div>
+
+<form class="insert-form" asp-action="Edit" method="post">
+    @Html.Partial("CourseForm", Model)
+    <br />
+    <button class="btn btn-primary mb-3" type="submit">Update Course</button>
+    <a class="btn btn-primary ml-3 mb-3" asp-action="Manage" asp-route-courseCode="@Model.Code">Manage Enrollment</a>
+    <button type="button" class="btn btn-danger mb-3 ml-3" data-toggle="modal" data-target="#deleteConfirmation">Delete</button>
+</form>
+<br />
+
+
+<div class="modal fade" id="deleteConfirmation" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">WARNING</h5>
+                <button type="button" class="close" data-dismiss="modal">
+                    <span>&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Are you sure you want to permanently delete this course?
+            </div>
+            <div class="modal-footer">
+                <form asp-action="Delete" method="post">
+                    <input type="hidden" asp-for="CourseId" />
+                    <button type="submit" class="btn btn-danger">Yes</button>
+                </form>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+            </div>
+        </div>
+    </div>
+</div>

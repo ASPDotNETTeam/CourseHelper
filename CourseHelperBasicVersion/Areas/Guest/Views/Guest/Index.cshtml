@@ -1,0 +1,15 @@
+﻿@{
+    ViewBag.Title = "CourseHelper";
+    ViewBag.Active = "Home";
+}
+<script src="~/js/galleryShifter.js"></script>
+<script>$(document).ready(function () {
+       $("#mainImage2").fadeOut();
+       loadImages(galleryDirectory);
+       moveNext();
+   });</script>
+<div class="gallery">
+    <img id="mainImage1" style="position: absolute;" />
+    <img id="mainImage2" style="position: absolute;" />
+</div>
+<div class="h4 title-header">Please log in or register to access our control panel.</div>

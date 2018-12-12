@@ -1,0 +1,128 @@
+﻿@model EnrollmentInfo
+@{
+    ViewBag.Title = "Enrolling Students";
+    ViewBag.Active = "Manage";
+}
+<div class="title-header">
+    <h2>Manage Enrollment: @Model.Course.Name</h2>
+    <br />
+    <h4>Space occupied: @Model.Course.Students.Count/<span class="courseMaxSize">@Model.Course.MaxSize</span></h4>
+</div>
+<div class="content-container">
+    <form class="form-inline">
+        <input class="form-control mr-sm-2 mb-3" type="search" placeholder="Search">
+        <button class="btn btn-info mb-3">Search</button>
+    </form>
+    <table class="table mb-3 content-table" id="enrolledTable">
+        <thead>
+            <tr>
+                <th scope="col" colspan="5" class="text-center">Enrolled Students</th>
+            </tr>
+            <tr>
+                <th scope="col">STUDENT ID</th>
+                <th scope="col">NAME</th>
+                <th scope="col">STATUS</th>
+                <th scope="col">SEMESTER</th>
+                <th scope="col">REGISTRATION</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (Student s in @Model.EnrolledStudents)
+            {
+                <tr class="content-row enrolled">
+                    <td>@s.StudentNumber</td>
+                    <td>@s.LastName, @s.FirstName</td>
+                    <td>@s.Status</td>
+                    <td>@s.Semester</td>
+                    <td>@(s.IsRegistered ? "Registered" : "Not Registered")</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <div class="text-center"><i class="fa fa-chevron-up fa-3x text-primary mr-5" style="cursor:pointer"></i><i class="fa fa-chevron-down fa-3x text-primary" style="cursor:pointer"></i></div>
+    <br />
+    <table class="table mb-3 content-table" id="unenrolledTable">
+        <thead>
+            <tr>
+                <th scope="col" colspan="5" class="text-center">Unenrolled Students</th>
+            </tr>
+            <tr>
+                <th scope="col">STUDENT ID</th>
+                <th scope="col">NAME</th>
+                <th scope="col">STATUS</th>
+                <th scope="col">SEMESTER</th>
+                <th scope="col">REGISTRATION</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (Student s in @Model.UnenrolledStudents)
+            {
+                <tr class="content-row unenrolled">
+                    <td>@s.StudentNumber</td>
+                    <td>@s.LastName, @s.FirstName</td>
+                    <td>@s.Status</td>
+                    <td>@s.Semester</td>
+                    <td>@(s.IsRegistered ? "Registered" : "Not Registered")</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    @Html.Partial("EnrollForm", new EnrollmentList() { CourseID = Model.Course.CourseId })
+
+</div>
+
+<div class="modal fade" id="excessiveModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Invalid operation</h5>
+                <button type="button" class="close" data-dismiss="modal">
+                    <span>&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                The number of students you are adding will exceed the course size limit.
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Ok</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $('.fa-chevron-up').click(function () {
+        var maxSize = $('.courseMaxSize').text();
+        var currentSize = $('table#enrolledTable > tbody > tr').length;
+        var studentsToEnroll = $('tr.content-row.unenrolled.selected').length;
+        if (studentsToEnroll + currentSize > maxSize) {
+            $('#excessiveModal').modal();
+        } else {
+            $('tr.content-row.unenrolled.selected').each(function () {
+                var studentID = $(this).children().first().text();
+                $('#enrollForm').children("[id='ID" + studentID + "']").remove();
+                $('<input>').attr('name', 'EnrollQueue').attr('id', 'ID' + studentID).attr('value', studentID).attr('type', 'hidden').appendTo('#enrollForm');
+                $(this).appendTo('#enrolledTable').removeClass('selected unenrolled').addClass('enrolled');
+            });
+            
+        }
+    });
+
+    $('.fa-chevron-down').click(function () {
+        $('tr.content-row.enrolled.selected').each(function () {
+            var studentID = $(this).children().first().text();
+            $('#enrollForm').children("[id='ID" + studentID + "']").remove();
+            $('<input>').attr('name', 'UnEnrollQueue').attr('id', 'ID' + studentID).attr('value', studentID).attr('type', 'hidden').appendTo('#enrollForm');
+            $(this).appendTo('#unenrolledTable').removeClass('selected enrolled').addClass('unenrolled');
+        });
+    });
+    
+    $('tr.content-row').click(function () {
+        var studentID = $(this).children().first().text();
+        if ($(this).hasClass('selected')) {
+            $(this).removeClass('selected');
+        } else {
+            $(this).addClass('selected');
+        }
+    });
+</script>

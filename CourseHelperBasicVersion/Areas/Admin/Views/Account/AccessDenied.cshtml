@@ -1,1 +1,25 @@
-﻿Denied!
+﻿@model LoginModel
+
+@{
+    if (Context.User.IsInRole("Admin"))
+    {
+        Layout = "_AdminLayout";
+    }
+    else if (Context.User.IsInRole("Faculty"))
+    {
+        Layout = "_FacultyLayout";
+    }
+    else if (Context.User.IsInRole("Student"))
+    {
+        Layout = "_StudentLayout";
+    }
+    else
+    {
+        Layout = "_GuestLayout";
+    }
+    ViewBag.Title = "Acccess Denied";
+}
+
+<div class="title-header text-danger">
+    <h2>Access Denied - You do not have clearance to access this page.</h2>
+</div>

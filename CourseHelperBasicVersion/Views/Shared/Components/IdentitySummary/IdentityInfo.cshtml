@@ -1,16 +1,15 @@
 ﻿@model IdentityInfo
-
 @if (Model.Name != null)
 {
+    <div class="text-center font-mini-20">Hello, @Model.Name!</div>
     <ul class="navbar-links">
-        <li>@Model.Name</li>
-        <li><a asp-action="Logout" asp-controller="Account" asp-area="Admin"><span>Logout</span></a></li>
+        <li><a href="~/Logout"><span>Logout</span></a></li>
     </ul>
 }
 else
 {
     <ul class="navbar-links">
-        <li><a asp-action="Login" asp-controller="Account" asp-area="Admin">Login</a></li>
-        <li><a asp-action="Create" asp-controller="Account" asp-area="Admin">Register</a></li>
+        <li @(ViewBag.Active == "Login" ? "class=active" : "")><a href="~/Login">Login</a></li>
+        <li @(ViewBag.Active == "Register" ? "class=active" : "")><a href="/Register">Register</a></li>
     </ul>
 }

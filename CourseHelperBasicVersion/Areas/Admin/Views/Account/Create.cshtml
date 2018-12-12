@@ -1,6 +1,8 @@
 ﻿@model UserModel
 @{
-    ViewBag.Title = "Register";
+    ViewBag.Title = "Register an account";
+    ViewBag.Active = "Register";
+    Layout = "_GuestLayout";
 }
 <div class="title-header">
     <h2>Register</h2>
@@ -8,40 +10,42 @@
 
 <div class="content-container">
     <div class="content-section">
-        <input type="hidden" name="csrfmiddlewaretoken" value="EyyVD25SUWDskvBxncJ4x6gqYPg0P86Ubnn3Iqjy6Sd1LPcQyqOHCXxmxrDiPujl">
-        <form asp-action="Create" asp-route-area="Admin" asp-controller="Account" method="post" novalidate>
-            <div class="col-lg-12" asp-validation-summary="All" style="color:red;margin-top:20px;padding-left:0;"></div>
+        <input type="hidden">
+        <form asp-action="Create" asp-area="Admin" asp-controller="Account" method="post">
             <fieldset class="form-group">
-                <legend class="border-bottom mb-4">Join Today</legend>
+                <legend class="border-bottom mb-4 font-white">Create an account today</legend>
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <input type="hidden" asp-for="Role" />
-                <div id="div_id_username" class="form-group">
-                    <label for="id_username" class="col-form-label  requiredField">
-                        First Name<span class="asteriskField">*</span>
-                    </label>
-                    <div class=""> <input asp-for="FirstName" type="text" autofocus="" class="textinput textInput form-control" id="id_username" placeholder="First Name" required> </div>
+                <div class="form-group">
+                    <label asp-for="FirstName" class="col-form-label">First Name*</label>
+                    <div><span asp-validation-for="FirstName" class="text-danger"></span></div>
+                    <input asp-for="FirstName" type="text" class="form-control" placeholder="First Name">
                 </div>
-                <div id="div_id_username" class="form-group">
-                    <label for="id_username" class="col-form-label  requiredField">
-                        Last Name<span class="asteriskField">*</span>
-                    </label>
-                    <div class=""> <input asp-for="LastName" type="text" autofocus="" class="textinput textInput form-control" id="id_username" placeholder="Last Name" required> </div>
+                <div class="form-group">
+                    <label asp-for="LastName" class="col-form-label">Last Name*</label>
+                    <div><span asp-validation-for="LastName" class="text-danger"></span></div>
+                    <input asp-for="LastName" type="text" class="form-control" placeholder="Last Name">
                 </div>
-                <div id="div_id_username" class="form-group">
-                    <label for="id_username" class="col-form-label  requiredField">
-                        User Name<span class="asteriskField">*</span>
-                    </label>
-                    <div class=""> <input asp-for="UserName" type="text" autofocus="" class="textinput textInput form-control" id="id_username" placeholder="User Name" required> </div>
+                <div class="form-group">
+                    <label asp-for="UserName" class="col-form-label">User Name*</label>
+                    <div><span asp-validation-for="UserName" class="text-danger"></span></div>
+                    <input asp-for="UserName" type="text" class="form-control" placeholder="User Name">
                 </div>
-                <div id="div_id_password" class="form-group">
-                    <label asp-for="Password" class="col-form-label  requiredField">
-                        Password<span class="asteriskField">*</span>
-                    </label> <div class=""> <input asp-for="Password" type="password" name="password" class="textinput textInput form-control" id="id_password" required> </div>
+                <div class="form-group">
+                    <label asp-for="Password" class="col-form-label">Password*</label>
+                    <div><span asp-validation-for="Password" class="text-danger"></span></div>
+                    <input asp-for="Password" type="password" class="form-control">
                 </div>
             </fieldset>
             <br />
             <div class="form-group">
-                <button class="btn btn-outline-info" type="submit">Sign Up</button>
+                <button class="btn btn-outline-info" type="submit">Register</button>
             </div>
         </form>
+        <div class="border-top pt-3">
+            <small class="font-white">
+                Have an account?<a class="ml-2" href="~/Login">Log In</a>
+            </small>
+        </div>
     </div>
 </div>

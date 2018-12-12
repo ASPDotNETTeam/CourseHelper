@@ -40,6 +40,7 @@ namespace CourseHelperBasicVersion.Models
                     dbCourse.Faculty = course.Faculty;
                     dbCourse.Name = course.Name;
                     dbCourse.Season = course.Season;
+                    dbCourse.MaxSize = course.MaxSize;
                     dbCourse.CourseStudents = course.CourseStudents;
                 }
             }

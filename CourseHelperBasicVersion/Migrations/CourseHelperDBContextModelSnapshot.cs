@@ -30,7 +30,10 @@ namespace CourseHelperBasicVersion.Migrations
 
                     b.Property<string>("Description");
 
-                    b.Property<string>("Faculty");
+                    b.Property<string>("Faculty")
+                        .IsRequired();
+
+                    b.Property<int>("MaxSize");
 
                     b.Property<string>("Name")
                         .IsRequired();

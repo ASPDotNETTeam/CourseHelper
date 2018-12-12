@@ -25,90 +25,83 @@ namespace CourseHelper.Controllers
             this.csDB = csDB;
         }
 
-        [AllowAnonymous]
         public IActionResult Index()
         {
             return View();
         }
-
-        [AllowAnonymous]
-        public IActionResult Display()
+        
+        public IActionResult List()
         {
             return View(courseDB.Courses);
         }
-
-        [Authorize(Roles = "Admin")]
+        
         public IActionResult Create()
         {
-            return View("Insert", new Course());
+            return View("Create", new Course());
         }
 
         [HttpPost]
-        [Authorize(Roles = "Admin")]
         public IActionResult Create(Course course)
         {
             if (ModelState.IsValid)
             {
                 courseDB.SaveCourse(course);
                 TempData["successMessage"] = $"Course {course.Name} successfully created!";
-                return RedirectToAction(nameof(Display));
+                return RedirectToAction(nameof(List));
             }
             else
             {
-                return View("Insert", course);
+                return View("Create", course);
             }
         }
-
-        [Authorize(Roles = "Admin")]
+        
         public IActionResult Edit(string courseCode)
         {
             if (courseCode == null)
             {
-                TempData["errorMessage"] = "You have to select a course to edit it!";
-                return RedirectToAction(nameof(Display));
+                TempData["errorMessage"] = "Please select a course to edit.";
+                return RedirectToAction(nameof(List));
             }
             Course course = courseDB.Courses.FirstOrDefault(c => c.Code.ToUpper() == courseCode.ToUpper());
             if (course == null)
             {
-                TempData["errorMessage"] = "Please select a valid course";
-                return RedirectToAction(nameof(Display));
+                TempData["errorMessage"] = "Please select a valid course to edit.";
+                return RedirectToAction(nameof(List));
             }
-            return View("Data", course);
+            return View("Edit", course);
         }
 
         [HttpPost]
-        [Authorize(Roles = "Admin")]
         public IActionResult Edit(Course course)
         {
             if (ModelState.IsValid)
             {
                 courseDB.SaveCourse(course);
                 TempData["SuccessMessage"] = $"Course {course.Name} successfully updated.";
-                return RedirectToAction(nameof(Display));
+                return RedirectToAction(nameof(List));
             }
             else
             {
-                TempData["errorMessage"] = "Wrong input, please check!";
-                return View("Data", course);
+                TempData["errorMessage"] = "Something went wrong, please try again.";
+                return View("Edit", course);
             }
         }
-
         
         public IActionResult Manage(string courseCode)
         {
             if (courseCode == null)
             {
-                TempData["errorMessage"] = "You have to select a course to add student!";
-                return RedirectToAction(nameof(Display));
+                TempData["errorMessage"] = "Please select a course to manage enrollment.";
+                return RedirectToAction(nameof(List));
             }
             Course course = courseDB.Courses.FirstOrDefault(c => c.Code.ToUpper() == courseCode.ToUpper());
             if (course == null)
             {
-                TempData["errorMessage"] = "Please select a valid course";
-                return RedirectToAction(nameof(Display));
+                TempData["errorMessage"] = "Please select a valid course to manage enrollment.";
+                return RedirectToAction(nameof(List));
             }
             EnrollmentInfo enrollInfo = CreateEnrollInfo(course);
-            return View("User", enrollInfo);
+            return View("Enrollment", enrollInfo);
         }
 
         [HttpPost]
@@ -119,47 +112,59 @@ namespace CourseHelper.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    if (list.EnrollQueue == null)
-                    {
-                        TempData["errorMessage"] = "Please select a valid student.";
-                        EnrollmentInfo enrollInfo = CreateEnrollInfo(course);
-                        return View("User", enrollInfo);
-                    }
+                    //if (list.EnrollQueue == null)
+                    //{
+                    //    TempData["errorMessage"] = "Please select a valid student.";
+                    //    EnrollmentInfo enrollInfo = CreateEnrollInfo(course);
+                    //    return View("Enrollment", enrollInfo);
+                    //}
                     foreach (long i in list.EnrollQueue)
                     {
                         Student student = studentDB.Students.FirstOrDefault(s => s.StudentNumber == i);
-                        CourseStudent csdb = course.AddStudent(student);
-                        studentDB.SaveStudent(student);
-                        csDB.AddCourseStudents(csdb);
+                        if (!course.Students.Contains(student))
+                        {
+                            CourseStudent csdb = course.AddStudent(student);
+                            studentDB.SaveStudent(student);
+                            csDB.AddCourseStudents(csdb);
+                        }
+                    }
+                    foreach (long i in list.UnEnrollQueue)
+                    {
+                        Student student = studentDB.Students.FirstOrDefault(s => s.StudentNumber == i);
+                        if (course.Students.Contains(student))
+                        {
+                            CourseStudent csdb = course.DeleteStudent(student);
+                            studentDB.SaveStudent(student);
+                            csDB.DeleteCourseStudents(csdb);
+                        }
                     }
                     courseDB.SaveCourse(course);
-                    TempData["successMessage"] = $"Student(s) successfully added to the course {course.Name}";
-                    return RedirectToAction(nameof(Display));
+                    TempData["successMessage"] = $"Enrollment changes successfully saved.";
+                    return RedirectToAction(nameof(List));
                 }
                 else
                 {
                     EnrollmentInfo enrollInfo = CreateEnrollInfo(course);
-                    return View("User", enrollInfo);
+                    return View("Enrollment", enrollInfo);
                 }
             }
             else
             {
-                TempData["errorMessage"] = "Please select a valid course!";
-                return RedirectToAction(nameof(Display));
+                TempData["errorMessage"] = "Please select a valid course to manage enrollment.";
+                return RedirectToAction(nameof(List));
             }
         }
 
         [HttpPost]
-        [Authorize(Roles = "Admin")]
         public IActionResult Delete(int courseID)
         {
             Course deletedCourse = courseDB.DeleteCourse(courseID);
             if (deletedCourse != null)
             {
-                TempData["successMessage"] = $"Course {deletedCourse.Name} successfully deleted";
+                TempData["successMessage"] = $"Course {deletedCourse.Name} successfully deleted.";
             }
             
-            return RedirectToAction(nameof(Display));
+            return RedirectToAction(nameof(List));
         }
 
         [NonAction]

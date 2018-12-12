@@ -23,16 +23,16 @@ namespace CourseHelperBasicVersion
         {
             Configuration = config;
         }
-    
-        // This method gets called by the runtime. Use this method to add services to the container.
-        // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
+
         public void ConfigureServices(IServiceCollection services)
         {
             // Adds identity database connection to services
             services.AddDbContext<AppIdentityDBContext>(options => options.UseSqlServer(Configuration["Data:CourseHelperIdentity:ConnectionString"]));
-            // Sets custom class for identity & roles
+            // Adds content database connection to services
+            services.AddDbContext<CourseHelperDBContext>(options => options.UseSqlServer(Configuration["Data:CourseHelper:ConnectionString"]));
+
+            // Seting custom class for identity & roles
             services.AddIdentity<CourseHelperUser, IdentityRole>(options => {
-                //password requirements
                 options.Password.RequiredLength = 6;
                 options.Password.RequireNonAlphanumeric = false;
                 options.Password.RequireLowercase = false;
@@ -41,13 +41,14 @@ namespace CourseHelperBasicVersion
             })
                 .AddEntityFrameworkStores<AppIdentityDBContext>()
                 .AddDefaultTokenProviders();
-            // Adds content database connection to services
-            services.AddDbContext<CourseHelperDBContext>(options => options.UseSqlServer(Configuration["Data:CourseHelper:ConnectionString"]));
-            // Setting the lifetime of table access
+            
+            // Setting lifetime of database table access
             services.AddTransient<ICourseDatabase, EFCourseDatabase>();
             services.AddTransient<IStudentDatabase, EFStudentDatabase>();
             services.AddTransient<ICourseStudentDatabase, EFCourseStudentDatabase>();
             services.AddTransient<IReviewDatabase, EFReviewDatabase>();
+
+            // Setting default authorization routes
             services.ConfigureApplicationCookie(options => {
                 options.LoginPath = "/Login";
                 options.LogoutPath = "/Logout";
@@ -55,8 +56,7 @@ namespace CourseHelperBasicVersion
             });
             services.AddMvc();
         }
-
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+        
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
             app.UseDeveloperExceptionPage();
@@ -105,13 +105,13 @@ namespace CourseHelperBasicVersion
                     );
                 routes.MapRoute(
                     name: "",
-                    template: "Register",
-                    defaults: new { area = "Admin", controller = "Account", action = "Create" }
+                    template: "Account/{action=Index}",
+                    defaults: new { area = "Admin", controller = "Account" }
                     );
                 routes.MapRoute(
-                    name: "",
-                    template: "Account/{action=List}",
-                    defaults: new { area = "Admin", controller = "Account" }
+                    name: "Register",
+                 template: "Register",
+                    defaults: new { area = "Admin", controller = "Account", action = "Create" }
                     );
                 routes.MapRoute(
                     name: "Login",
@@ -129,14 +129,9 @@ namespace CourseHelperBasicVersion
                     defaults: new { area = "Admin", controller = "Account", action = "AccessDenied" }
                     );
                 routes.MapRoute(
-                    name: "CreateAccount",
-                    template: "Account/Create",
-                    defaults: new { area = "Admin", controller = "Account", action="Create"}
-                    );
-                routes.MapRoute(
                     name:"default",
-                    template:"{controller=Course}/{action=Index}",
-                    defaults: new {area="Faculty"}
+                    template:"{controller=Guest}/{action=Index}",
+                    defaults: new {area="Guest"}
                     );
             });
             SeedData.Populate(app);

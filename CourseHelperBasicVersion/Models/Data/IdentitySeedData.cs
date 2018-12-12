@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using CourseHelperBasicVersion.Models.Database;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;
 using System;
@@ -12,9 +13,10 @@ namespace CourseHelperBasicVersion.Models.Data
     {
         public static async void Populate(IApplicationBuilder app)
         {
+            AppIdentityDBContext context = app.ApplicationServices.GetRequiredService<AppIdentityDBContext>();
+            context.Database.EnsureCreated();
             UserManager<CourseHelperUser> userManager = app.ApplicationServices.GetRequiredService<UserManager<CourseHelperUser>>();
             RoleManager<IdentityRole> roleManager = app.ApplicationServices.GetRequiredService<RoleManager<IdentityRole>>();
-
             IdentityRole adminRole = await roleManager.FindByNameAsync("Admin");
             IdentityRole facultyRole = await roleManager.FindByNameAsync("Faculty");
             IdentityRole studentRole = await roleManager.FindByNameAsync("Student");

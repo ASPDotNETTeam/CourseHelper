@@ -24,8 +24,13 @@ namespace CourseHelperBasicVersion.Models
         [Required]
         public string Code { get; set; }
         public string Description { get; set; }
+        [Required]
         public SEASON Season { get; set; }
+        [Required]
         public string Faculty { get; set; }
+        [Required]
+        [Range(1, 36)]
+        public int MaxSize { get; set; }
         public ICollection<CourseStudent> CourseStudents { get; set; } = new List<CourseStudent>();
         private IEnumerable<Student> GetStudents()
         {
