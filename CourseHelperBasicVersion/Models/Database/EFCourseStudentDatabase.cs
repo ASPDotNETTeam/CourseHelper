@@ -26,6 +26,17 @@ namespace CourseHelperBasicVersion.Models
             {
                 dbContext.CourseStudents.Add(dbcs);
             }
+            dbContext.SaveChanges();
+        }
+
+        public void DeleteCourseStudents(CourseStudent courseStudent)
+        {
+            CourseStudent dbcs = dbContext.CourseStudents.FirstOrDefault(cs => cs.CourseId == courseStudent.CourseId && cs.StudentId == courseStudent.StudentId);
+            if(dbcs != null)
+            {
+                dbContext.CourseStudents.Remove(dbcs);
+            }
+            dbContext.SaveChanges();
         }
     }
 }

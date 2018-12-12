@@ -9,5 +9,6 @@ namespace CourseHelperBasicVersion.Models
     {
         IQueryable<CourseStudent> CourseStudents { get; }
         void AddCourseStudents(CourseStudent courseStudent);
+        void DeleteCourseStudents(CourseStudent courseStudent);
     }
 }

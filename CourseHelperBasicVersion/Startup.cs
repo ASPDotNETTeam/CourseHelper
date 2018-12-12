@@ -81,7 +81,7 @@ namespace CourseHelperBasicVersion
                 routes.MapRoute(
                     name: "student",
                     template: "Student/{action}",
-                    defaults: new { controller = "Student", action = "DisplayCourses", area = "Student" }
+                    defaults: new { controller = "Student", action = "Index", area = "Student" }
                     );
                 routes.MapRoute(
                     name: "",
@@ -94,9 +94,14 @@ namespace CourseHelperBasicVersion
                     defaults: new { controller = "Course", action = "Edit", area = "Faculty" }
                     );
                 routes.MapRoute(
-                    name: "",
+                    name: "Faculty",
                     template: "Faculty/{action}",
                     defaults: new { controller = "Course", action = "Index", area = "Faculty" }
+                    );
+                routes.MapRoute(
+                    name: "Admin",
+                    template: "Admin/{action}",
+                    defaults: new { controller = "Account", action = "Index", area = "Admin" }
                     );
                 routes.MapRoute(
                     name: "",

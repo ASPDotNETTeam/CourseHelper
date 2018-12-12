@@ -31,6 +31,11 @@ namespace CourseHelperBasicVersion.Areas.Admin.Controllers
             this.passwordHasher = pswdHash;
         }
 
+        public IActionResult Index()
+        {
+            return View();
+        }
+
         [AllowAnonymous]
         public IActionResult Create()
         {
@@ -286,7 +291,20 @@ namespace CourseHelperBasicVersion.Areas.Admin.Controllers
                     if (result.Succeeded)
                     {
                         TempData["successMessage"] = $"Successfully logged in.";
-                        return Redirect(returnURL ?? "/");
+                        string indexUrl = "/";
+                        if (await userManager.IsInRoleAsync(user, "Admin"))
+                        {
+                            indexUrl = "/admin";
+                        }
+                        else if (await userManager.IsInRoleAsync(user, "Faculty"))
+                        {
+                            indexUrl = "/faculty";
+                        }
+                        else if (await userManager.IsInRoleAsync(user, "Student"))
+                        {
+                            indexUrl = "/student";
+                        }
+                        return Redirect(returnURL ?? indexUrl);
                     }
                 }
                 TempData["errorMessage"] = $"Invalid user or password.";

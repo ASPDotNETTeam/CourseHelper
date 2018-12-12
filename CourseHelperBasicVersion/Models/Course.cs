@@ -50,5 +50,20 @@ namespace CourseHelperBasicVersion.Models
                 return cs;
             }
         }
+        public CourseStudent DeleteStudent(Student student)
+        {
+            if (!student.Courses.Contains(this))
+            {
+                return null;
+            }
+            else
+            {
+                CourseStudent cs = CourseStudents.FirstOrDefault(
+                    cst => cst.CourseId == CourseId && cst.StudentId == student.StudentId);
+                CourseStudents.Remove(cs);
+                student.CourseStudents.Remove(cs);
+                return cs;
+            }
+        }
     }
 }

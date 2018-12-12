@@ -13,6 +13,17 @@
 
 </head>
 <body>
+    <nav>
+        <div class="navbar-vertical">
+            <a asp-action="Index"><img src="~/images/logo-black.png" width="130" height="80" class="content-logo" /></a>
+            @await Component.InvokeAsync(nameof(IdentitySummary))
+            <ul class="navbar-links">
+                <li @(ViewBag.Active == "Home" ? "class=active" : "")><a asp-action="Index"><span>HOME</span></a></li>
+                <li @(ViewBag.Active == "Create" ? "class=active" : "")><a asp-action="Create"><span>Create</span></a></li>
+                <li @(ViewBag.Active == "List" ? "class=active" : "")><a asp-action="List"><span>List</span></a></li>
+            </ul>
+        </div>
+    </nav>
     <div class="wrapper">
         @if (TempData["errorMessage"] != null)
         {

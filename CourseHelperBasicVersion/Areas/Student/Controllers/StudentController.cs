@@ -38,8 +38,10 @@ namespace CourseHelper.Controllers
         public async Task<IActionResult> Index()
         {
             Student student = await getLoggedInStudent();
-            //May need/have to check for null values student?.LastName ?? "message"
-            TempData["errorMessage"] = student.LastName;
+            if(student == null)
+            {
+                TempData["errorMessage"] = "No student account related";
+            }
             return View();
         }
 
@@ -48,7 +50,7 @@ namespace CourseHelper.Controllers
             return View("Display", courseDB.Courses);
         }
 
-        public IActionResult Enrol(string courseCode)
+        public async Task<IActionResult> Enrol(string courseCode)
         {
             if (courseCode == null)
             {
@@ -61,10 +63,8 @@ namespace CourseHelper.Controllers
                 TempData["errorMessage"] = "Please select a valid course";
                 return RedirectToAction(nameof(DisplayCourses));
             }
-            // get student info from the identity info
-            string userName = User.Identity.Name.ToString();
-            Student student = studentDB.Students.FirstOrDefault(s => s.FirstName == userName);
-            if(student == null)
+            Student student = await getLoggedInStudent();
+            if (student == null)
             {
                 TempData["errorMessage"] = "no student data found";
                 return RedirectToAction(nameof(DisplayCourses));
@@ -80,16 +80,15 @@ namespace CourseHelper.Controllers
                 studentDB.SaveStudent(student);
                 csDB.AddCourseStudents(csdb);
                 courseDB.SaveCourse(course);
-                TempData["successMessage"] = $"Enrollment completed! You have added to course {courseCode}";
+                TempData["successMessage"] = $"Enrollment completed! You are enrolled to course {courseCode}";
                 return RedirectToAction(nameof(MyCourses));
             }
             return RedirectToAction(nameof(DisplayCourses));
         }
 
-        public IActionResult MyCourses()
+        public async Task<IActionResult> MyCourses()
         {
-            string userName = User.Identity.Name.ToString();
-            Student student = studentDB.Students.FirstOrDefault(s => s.FirstName == userName);
+            Student student = await getLoggedInStudent();
             if (student == null)
             {
                 TempData["errorMessage"] = "no student data found";
@@ -98,7 +97,7 @@ namespace CourseHelper.Controllers
             return View(courseDB.Courses.Where(c => c.Students.Contains(student)));
         }
 
-        public IActionResult Drop(string courseCode)
+        public async Task<IActionResult> Drop(string courseCode)
         {
             if (courseCode == null)
             {
@@ -111,15 +110,21 @@ namespace CourseHelper.Controllers
                 TempData["errorMessage"] = "Please select a valid course";
                 return RedirectToAction(nameof(DisplayCourses));
             }
-            string userName = User.Identity.Name.ToString();
-            Student student = studentDB.Students.FirstOrDefault(s => s.FirstName == userName);
+            Student student = await getLoggedInStudent();
             if (student == null)
             {
                 TempData["errorMessage"] = "no student data found";
                 return RedirectToAction(nameof(DisplayCourses));
             }
-            // drop student from the course
-            // TempData["successMessage"] = "Course successfully dropped";
+            if (student.Courses.Contains(course))
+            {
+                CourseStudent csdb = course.DeleteStudent(student);
+                studentDB.SaveStudent(student);
+                csDB.DeleteCourseStudents(csdb);
+                courseDB.SaveCourse(course);
+                TempData["successMessage"] = $"drop completed! You are no longer have course {courseCode}";
+                return RedirectToAction(nameof(MyCourses));
+            }
             return RedirectToAction(nameof(MyCourses));
         }
 
@@ -128,13 +133,13 @@ namespace CourseHelper.Controllers
             if (courseCode == null)
             {
                 TempData["errorMessage"] = "You have to select a course to add student!";
-                return RedirectToAction(nameof(DisplayCourses));
+                return RedirectToAction(nameof(MyCourses));
             }
             Course course = courseDB.Courses.FirstOrDefault(c => c.Code.ToUpper() == courseCode.ToUpper());
             if (course == null)
             {
                 TempData["errorMessage"] = "Please select a valid course";
-                return RedirectToAction(nameof(DisplayCourses));
+                return RedirectToAction(nameof(MyCourses));
             }
             Review review = new Review() { CourseCode = courseCode, CourseName = course.Name};
             return View(review);
