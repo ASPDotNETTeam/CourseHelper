@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using CourseHelperBasicVersion.Models.Database;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using System;
@@ -17,7 +18,13 @@ namespace CourseHelperBasicVersion.Models
             if (!context.Courses?.Any() ?? true)
             {
                 addSeedCourses(context);
+            }
+            if (!context.Students?.Any() ?? true)
+            {
                 addSeedStudents(context);
+            }
+            if (!context.Reviews?.Any() ?? true) {
+                addSeedReviews(context);
             }
             context.SaveChanges();
         }

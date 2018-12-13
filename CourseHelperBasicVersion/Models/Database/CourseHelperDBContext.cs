@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace CourseHelperBasicVersion.Models
+namespace CourseHelperBasicVersion.Models.Database
 {
     public class CourseHelperDBContext : DbContext
     {        public CourseHelperDBContext(DbContextOptions<CourseHelperDBContext> options) : base(options) {

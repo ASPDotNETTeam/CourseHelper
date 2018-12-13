@@ -21,10 +21,8 @@
 </head>
 <body>
     <nav>
-
         <div class="navbar-vertical">
             <a asp-action="Index"><img src="~/images/logo-black.png" width="130" height="100" class="content-logo" /></a>
-
             <ul class="navbar-links">
                 @await Component.InvokeAsync(nameof(IdentitySummary))
                 <li @(ViewBag.Active == "Home" ? "class=active" : "")><a asp-action="Index" asp-controller="Course" asp-area="Faculty"><span>HOME</span></a></li>

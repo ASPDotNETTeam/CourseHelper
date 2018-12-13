@@ -1,0 +1,26 @@
+﻿@model string
+@{
+    if (Context.User.IsInRole("Admin"))
+    {
+        Layout = "_AdminLayout";
+    }
+    else if (Context.User.IsInRole("Faculty"))
+    {
+        Layout = "_FacultyLayout";
+    }
+    else if (Context.User.IsInRole("Student"))
+    {
+        Layout = "_StudentLayout";
+    }
+    ViewBag.Title = "Account Settings";
+    ViewBag.Active = "Settings";
+}
+
+<div class="content-container">
+    <div class="title-header">
+        <h2>Account settings</h2>
+        <br />
+        <a class="btn btn-primary" asp-action="ChangePassword" asp-route-id="@Model" asp-controller="Account">Change Password</a>
+    </div>
+</div>
+

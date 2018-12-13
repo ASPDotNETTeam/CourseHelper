@@ -22,24 +22,30 @@
 <body>
     <nav>
         <div class="navbar-vertical">
-            <a asp-action="Index"><img src="~/images/logo-black.png" width="130" height="80" class="content-logo" /></a>
-            @await Component.InvokeAsync(nameof(IdentitySummary))
+            <a asp-action="Index"><img src="~/images/logo-black.png" width="130" height="100" class="content-logo" /></a>
             <ul class="navbar-links">
-                <li @(ViewBag.Active == "Home" ? "class=active" : "")><a asp-action="Index"><span>HOME</span></a></li>
-                <li @(ViewBag.Active == "Display" ? "class=active" : "")><a asp-action="DisplayCourses"><span>DISPLAY</span></a></li>
-                <li @(ViewBag.Active == "MyCourses" ? "class=active" : "")><a asp-action="MyCourses"><span>COURSES</span></a></li>
-                <li @(ViewBag.Active == "ReviewList" ? "class=active" : "")><a asp-action="ReviewList"><span>REVIEWS</span></a></li>
+                @await Component.InvokeAsync(nameof(IdentitySummary))
+                <li @(ViewBag.Active == "Home" ? "class=active" : "")><a asp-action="Index" asp-controller="Student"><span>HOME</span></a></li>
+                <li @(ViewBag.Active == "Courses" ? "class=active" : "")><a asp-action="List" asp-controller="Student"><span>COURSES</span></a></li>
+                <li @(ViewBag.Active == "MyCourses" ? "class=active" : "")><a asp-action="EnrolledCoursesList" asp-controller="Student"><span>MY COURSES</span></a></li>
+                <li @(ViewBag.Active == "ReviewList" ? "class=active" : "")><a asp-action="List" asp-controller="Review"><span>REVIEWS</span></a></li>
             </ul>
+            <div class="navbar-footer">
+                <a href="https://github.com/FrunkZhou/"><i class="fa fa-github" style="font-size:30px;color:white"></i></a>
+                <a href="https://www.facebook.com/aCourseHelper/"><i class="fa fa-facebook" style="font-size:30px;color:white"></i></a>
+                <a href="https://www.twitter.com/aCourseHelper/"><i class="fa fa-twitter" style="font-size:30px;color:white"></i></a>
+                <a href="https://www.youtube.com/aCourseHelper/"><i class="fa fa-youtube-play" style="font-size:30px;color:white"></i></a>
+            </div>
         </div>
     </nav>
     <div class="wrapper">
         @if (TempData["errorMessage"] != null)
         {
-            <div class="alert alert-danger">@TempData["errorMessage"]</div>
+            <div class="alert alert-danger text-center">@TempData["errorMessage"]</div>
         }
         else if (TempData["successMessage"] != null)
         {
-            <div class="alert alert-success">@TempData["successMessage"]</div>
+            <div class="alert alert-success text-center">@TempData["successMessage"]</div>
         }
         <div class="navbar-menu"><i class="fa fa-bars nav-button"></i></div>
         @RenderBody()

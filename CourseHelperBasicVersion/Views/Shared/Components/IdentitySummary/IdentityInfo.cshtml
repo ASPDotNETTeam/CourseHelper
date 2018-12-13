@@ -3,6 +3,7 @@
 {
     <div class="text-center font-mini-20">Hello, @Model.Name!</div>
     <ul class="navbar-links">
+        <li @(ViewBag.Active == "Settings" ? "class=active" : "")><a asp-action="Settings" asp-controller="Account" asp-area="Admin"><span>Settings</span></a></li>
         <li><a href="~/Logout"><span>Logout</span></a></li>
     </ul>
 }

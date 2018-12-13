@@ -1,0 +1,59 @@
+﻿@model IEnumerable<Course>
+@{
+    ViewBag.Title = "Course List";
+    ViewBag.Active = "Courses";
+}
+
+<div class="title-header">
+    <h2>List of Courses</h2>
+</div>
+<div class="content-container">
+    <form class="form-inline">
+        <input class="form-control mr-sm-2 mb-3" type="search" placeholder="Search">
+        <button class="btn btn-info mb-3">Search</button>
+    </form>
+    <table class="table mb-3 content-table">
+        <thead>
+            <tr>
+                <th scope="col">COURSE NAME</th>
+                <th scope="col"># Enrolled</th>
+                <th scope="col">COURSE CODE</th>
+                <th scope="col">SEASON</th>
+                <th scope="col">FACULTY</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (Course c in Model)
+            {
+                <tr class="content-row">
+                    <td class="content-col">@c.Name</td>
+                    <td class="content-col">@c.Students.Count()/@c.MaxSize</td>
+                    <td class="content-col">@c.Code</td>
+                    <td class="content-col">@c.Season</td>
+                    <td class="content-col">@c.Faculty</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <a class="btn btn-primary mb-3" id="enrolButton" asp-action="Enroll">View Course Details</a>
+</div>
+
+<script>
+    var enrolHref = $('#enrolButton').attr('href');
+    var href;
+    var isHidden = true;
+    //deals with clicks on course rows (highlighting selected rows)
+    $('td.content-col').click(function () {
+        //removes previously highlighted row
+        if ($(this).parent().hasClass('selected')) {
+            $(this).parent().removeClass('selected');
+            $('#enrolButton').attr('href', enrolHref);
+        } else {
+            $('tr.content-row').removeClass('selected');
+            $(this).parent().addClass('selected');
+            // configures student enrollment button href to course code of selected row
+            href = enrolHref + "/" + $(this).parent().children(':nth-child(3)').text();
+            $('#enrolButton').attr('href', href);
+        }
+    });
+</script>

@@ -32,6 +32,7 @@ namespace CourseHelperBasicVersion.Models
         [Range(1, 36)]
         public int MaxSize { get; set; }
         public ICollection<CourseStudent> CourseStudents { get; set; } = new List<CourseStudent>();
+
         private IEnumerable<Student> GetStudents()
         {
             foreach (CourseStudent cs in CourseStudents)
@@ -41,6 +42,7 @@ namespace CourseHelperBasicVersion.Models
         }
         [NotMapped]
         public ICollection<Student> Students { get { return GetStudents().ToList<Student>(); } }
+
         public CourseStudent AddStudent(Student student)
         {
             if (student.Courses.Contains(this))

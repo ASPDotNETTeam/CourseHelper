@@ -1,0 +1,76 @@
+﻿@model Course
+@{
+    ViewBag.Title = "Course Enrollment";
+}
+
+<div class="title-header">
+    <h2>Course Details</h2>
+    <br />
+    <h4>Current Size: @Model.Students.Count/@Model.MaxSize</h4>
+</div>
+<div class="content-container">
+    <div class="card">
+        <div class="card-header">
+            @if (Model.Students.Count >= Model.MaxSize)
+            {
+                @:Full
+            }
+            else
+            {
+                @:Space Available
+            }
+        </div>
+        <div class="card-body">
+            <h5 class="card-title">Name: @Model.Name</h5>
+            <p class="card-text">@Model.Description</p>
+        </div>
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item">Course Code: @Model.Code</li>
+            <li class="list-group-item">Faculty: @Model.Faculty</li>
+            <li class="list-group-item">Season: @Model.Season</li>
+        </ul>
+        <div class="card-body">
+            @if (Model.Students.Contains(ViewBag.Student))
+            {
+                <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#dropConfirmation">Drop Course</button>
+            }
+            else
+            {
+                @if (Model.Students.Count >= Model.MaxSize)
+                {
+                    <button type="button" class="btn btn-dark disabled">Class Full</button>
+                }
+                else
+                {
+                    <form method="post" asp-action="Enroll">
+                        <input type="hidden" asp-for="CourseId" value="@Model.CourseId" />
+                        <button type="submit" class="btn btn-primary">Enroll</button>
+                    </form>
+                }
+            }
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="dropConfirmation" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">WARNING</h5>
+                <button type="button" class="close" data-dismiss="modal">
+                    <span>&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Are you sure you want to drop this course?
+            </div>
+            <div class="modal-footer">
+                <form asp-action="Drop" method="post">
+                    <input type="hidden" asp-for="CourseId" />
+                    <button type="submit" class="btn btn-danger">Yes</button>
+                </form>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+            </div>
+        </div>
+    </div>
+</div>

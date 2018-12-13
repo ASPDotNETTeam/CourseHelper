@@ -1,0 +1,34 @@
+﻿@model IEnumerable<Review>
+
+@{
+    ViewBag.Title = "Review List";
+    ViewBag.Active = "ReviewList";
+}
+
+<div class="title-header">
+    <h2>List of Reviews</h2>
+</div>
+
+<div class="content-container">
+    <form class="form-inline">
+        <input class="form-control mr-sm-2 mb-3" type="search" placeholder="Search">
+        <button class="btn btn-info mb-3">Search</button>
+    </form>
+    <table class="table content-table">
+        @foreach (Review review in Model)
+        {
+            <tr class="content-row">
+                <td class="content-col">
+                    <p>@review.CreatorName</p>
+                    <p>Created on @review.CreateTime</p>
+                </td>
+                <td class="content-col">
+                    <p>
+                        Course Name: @review.CourseName <br>Course Code: @review.CourseCode
+                    </p>
+                    <p>@review.Comment</p>
+                </td>
+            </tr>
+        }
+    </table>
+</div>

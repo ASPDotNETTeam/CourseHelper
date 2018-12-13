@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using CourseHelperBasicVersion.Models;
+using CourseHelperBasicVersion.Models.Database;
 using CourseHelperBasicVersion.Models.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
-namespace CourseHelperBasicVersion.Areas.Admin.Controllers
+namespace CourseHelperBasicVersion.Controllers
 {
     [Area("Admin")]
     [Authorize]
@@ -39,13 +40,17 @@ namespace CourseHelperBasicVersion.Areas.Admin.Controllers
         [AllowAnonymous]
         public IActionResult Create()
         {
+            if (HttpContext.User.IsInRole("Admin"))
+            {
+                return View("AdminCreate", new UserModel());
+            }
             return View("Create", new UserModel());
         }
 
         [Authorize(Roles = "Admin")]
         public IActionResult CreateFaculty()
         {
-            return View("Create", new UserModel() { Role = 1 });
+            return View("AdminCreate", new UserModel() { Role = 1 });
         }
 
         [HttpPost]
@@ -223,22 +228,33 @@ namespace CourseHelperBasicVersion.Areas.Admin.Controllers
             return View(user);
         }
         
-        [Authorize(Roles = "Student, Faculty")]
+        [Authorize]
         public async Task<IActionResult> ChangePassword(string id)
         {
             CourseHelperUser user = await userManager.FindByIdAsync(id);
             if (user != null)
             {
-                return View(user);
+                return View("ChangePassword", id);
             }
             else
             {
                 TempData["errorMessage"] = $"Account not found.";
-                return RedirectToAction("List");
+                if (HttpContext.User.IsInRole("Admin"))
+                {
+                    return RedirectToAction("Index", "Account");
+                }
+                else if (HttpContext.User.IsInRole("Faculty"))
+                {
+                    return RedirectToAction("Index", "Faculty");
+                }
+                else
+                {
+                    return RedirectToAction("Index", "Student");
+                }
             }
         }
         
-        [Authorize(Roles = "Student, Faculty")]
+        [Authorize]
         [HttpPost]
         public async Task<IActionResult> ChangePassword(string id, string oldPassword, string newPassword)
         {
@@ -249,7 +265,18 @@ namespace CourseHelperBasicVersion.Areas.Admin.Controllers
                 if (changePass.Succeeded)
                 {
                     TempData["successMessage"] = $"Password successfully changed.";
-                    return RedirectToAction("Home", "Student");
+                    if (HttpContext.User.IsInRole("Admin"))
+                    {
+                        return RedirectToAction("Index", "Account");
+                    }
+                    else if (HttpContext.User.IsInRole("Faculty"))
+                    {
+                        return RedirectToAction("Index", "Faculty");
+                    }
+                    else
+                    {
+                        return RedirectToAction("Index", "Student");
+                    }
                 }
                 else
                 {
@@ -261,6 +288,13 @@ namespace CourseHelperBasicVersion.Areas.Admin.Controllers
                 TempData["errorMessage"] = $"Account not found.";
             }
             return View("ChangePassword", id);
+        }
+
+        [Authorize]
+        public async Task<IActionResult> Settings()
+        {
+            CourseHelperUser user = await userManager.GetUserAsync(HttpContext.User);
+            return View("Settings", user.Id);
         }
 
         [AllowAnonymous]

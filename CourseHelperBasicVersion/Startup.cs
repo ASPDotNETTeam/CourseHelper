@@ -64,24 +64,24 @@ namespace CourseHelperBasicVersion
             app.UseAuthentication();
             app.UseMvc(routes => {
                 routes.MapRoute(
-                    name: "studentDropCourse",
-                    template: "Student/Drop/{courseCode}",
-                    defaults: new { controller = "Student", action = "Drop", area = "Student" }
+                    name: "",
+                    template: "Student/ReviewList",
+                    defaults: new { controller = "Review", action = "List", area = "Student" }
                     );
                 routes.MapRoute(
-                    name: "studentReview",
-                    template: "Student/ReviewForm/{courseCode}",
-                    defaults: new { controller = "Student", action = "ReviewForm", area = "Student" }
+                    name: "",
+                    template: "Student/CreateReview/{courseCode}",
+                    defaults: new { controller = "Review", action = "Create", area = "Student" }
                     );
                 routes.MapRoute(
-                    name: "studentEnrollment",
-                    template: "Student/Enrol/{courseCode}",
-                    defaults: new { controller = "Student", action = "Enrol", area = "Student" }
+                    name: "",
+                    template: "Student/UnEnroll/{courseCode}",
+                    defaults: new { controller = "Student", action = "UnEnroll", area = "Student" }
                     );
                 routes.MapRoute(
-                    name: "student",
-                    template: "Student/{action}",
-                    defaults: new { controller = "Student", action = "Index", area = "Student" }
+                    name: "",
+                    template: "Student/Enroll/{courseCode}",
+                    defaults: new { controller = "Student", action = "Enroll", area = "Student" }
                     );
                 routes.MapRoute(
                     name: "",
@@ -94,19 +94,24 @@ namespace CourseHelperBasicVersion
                     defaults: new { controller = "Course", action = "Edit", area = "Faculty" }
                     );
                 routes.MapRoute(
-                    name: "Faculty",
-                    template: "Faculty/{action}",
-                    defaults: new { controller = "Course", action = "Index", area = "Faculty" }
+                    name: "",
+                    template: "Student/{action=Index}",
+                    defaults: new { controller = "Student", area = "Student" }
                     );
                 routes.MapRoute(
-                    name: "Admin",
-                    template: "Admin/{action}",
-                    defaults: new { controller = "Account", action = "Index", area = "Admin" }
+                     name: "",
+                     template: "Account/{action=Index}",
+                    defaults: new { controller = "Account", area = "Admin" }
+                     );
+                routes.MapRoute(
+                    name: "",
+                    template: "Admin/{action=Index}",
+                    defaults: new { controller = "Account", area = "Admin" }
                     );
                 routes.MapRoute(
                     name: "",
-                    template: "Account/{action=Index}",
-                    defaults: new { area = "Admin", controller = "Account" }
+                    template: "Faculty/{action=Index}",
+                    defaults: new { controller = "Course", area = "Faculty" }
                     );
                 routes.MapRoute(
                     name: "Register",

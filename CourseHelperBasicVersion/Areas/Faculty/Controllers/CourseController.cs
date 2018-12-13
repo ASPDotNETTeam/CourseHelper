@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using CourseHelperBasicVersion.Models;
+using CourseHelperBasicVersion.Models.Database;
 using CourseHelperBasicVersion.Models.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -112,12 +113,6 @@ namespace CourseHelper.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    //if (list.EnrollQueue == null)
-                    //{
-                    //    TempData["errorMessage"] = "Please select a valid student.";
-                    //    EnrollmentInfo enrollInfo = CreateEnrollInfo(course);
-                    //    return View("Enrollment", enrollInfo);
-                    //}
                     foreach (long i in list.EnrollQueue)
                     {
                         Student student = studentDB.Students.FirstOrDefault(s => s.StudentNumber == i);

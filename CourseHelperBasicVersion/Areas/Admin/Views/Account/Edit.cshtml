@@ -7,34 +7,34 @@
 </div>
 <div class="content-container">
     <div class="content-section">
-            <div asp-validation-summary="All" class="text-danger"></div>
-            <form asp-action="Edit" asp-route-area="Admin" asp-controller="Account" method="post">
-                <input asp-for="Id" value="@Model.Id" type="hidden" />
-                <fieldset class="form-group">
-                    <legend class="border-bottom mb-4 font-white">Edit User Details</legend>
-                    <div class="form-group">
-                        <label asp-for="UserName">User Name: </label>
-                        <input asp-for="UserName" class="form-control" disabled />
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="FirstName">First Name: </label>
-                        <input asp-for="FirstName" class="form-control" placeholder="@Model.FirstName" />
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="LastName">Last Name: </label>
-                        <input asp-for="LastName" class="form-control" placeholder="@Model.LastName" />
-                    </div>
-                    <div class="form-group">
-                        <label for="password">Password</label>
-                        <input name="password" class="form-control" />
-                    </div>
-                </fieldset>
+        <div asp-validation-summary="All" class="text-danger"></div>
+        <form asp-action="Edit" asp-route-area="Admin" asp-controller="Account" method="post">
+            <input asp-for="Id" value="@Model.Id" type="hidden" />
+            <fieldset class="form-group">
+                <legend class="border-bottom mb-4 font-white">Edit User Details</legend>
+                <div class="form-group">
+                    <label asp-for="UserName">User Name: </label>
+                    <input asp-for="UserName" class="form-control" disabled />
+                </div>
+                <div class="form-group">
+                    <label asp-for="FirstName">First Name: </label>
+                    <input asp-for="FirstName" class="form-control" placeholder="@Model.FirstName" />
+                </div>
+                <div class="form-group">
+                    <label asp-for="LastName">Last Name: </label>
+                    <input asp-for="LastName" class="form-control" placeholder="@Model.LastName" />
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input name="password" class="form-control" />
+                </div>
+            </fieldset>
 
-                <button type="submit" class="btn btn-primary">Save</button>
-                <a asp-action="List" class="btn btn-secondary">Cancel</a>
-            </form>
-        </div>
+            <button type="submit" class="btn btn-primary">Save</button>
+            <a asp-action="List" class="btn btn-secondary">Cancel</a>
+        </form>
     </div>
+</div>
 
 
 

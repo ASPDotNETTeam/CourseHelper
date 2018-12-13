@@ -1,0 +1,45 @@
+﻿@model Review
+
+@{ 
+    ViewBag.Title = "Create a Review";
+}
+
+<div class="title-header">
+    <h2>Review Course</h2>
+</div>
+
+<div class="content-container">
+    <form asp-action="Create" method="post">
+        <div class="form-group row">
+            <label class="col-sm-5 col-form-label-lg mb-sm-4" for="CourseName">Course Name</label>
+            <div class="col-sm-7">
+                <input type="text" class="form-control" asp-for="CourseName" value=@Model.CourseName readonly>
+            </div>
+            <label class="col-sm-5 col-form-label-lg mb-sm-4" for="CourseCode">Course Code</label>
+            <div class="col-sm-7">
+                <input type="text" class="form-control" asp-for="CourseCode" value=@Model.CourseCode readonly>
+            </div>
+            <label class="col-sm-5 col-form-label-lg mb-sm-4" for="Semester">Semester</label>
+            <div class="col-sm-7">
+                <input type="text" class="form-control" asp-for="Semester" required />
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-5 col-form-label-lg mb-sm-4" for="Comment">Comment</label>
+            <div class="col-sm-7">
+                <textarea rows="4" class="form-control" asp-for="Comment" required></textarea>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-5 col-form-label-lg mb-sm-4" for="CreatorName">Use by your name?</label>
+            <div class="col-sm-7">
+                <select class="form-control" asp-for="CreatorName">
+                    <option value="false">Choose an option</option>
+                    <option value="true">Yes, use my name</option>
+                    <option value="false">No, leave me anonymous</option>
+                </select>
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary mb-3">Submit Review</button>
+    </form>
+</div>
