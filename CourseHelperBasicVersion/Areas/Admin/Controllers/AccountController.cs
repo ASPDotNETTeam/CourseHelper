@@ -65,7 +65,8 @@ namespace CourseHelperBasicVersion.Controllers
                     {
                         FirstName = userModel.FirstName,
                         LastName = userModel.LastName,
-                        UserName = userModel.UserName
+                        UserName = userModel.UserName,
+                        Role = "Faculty"
                     };
                     IdentityResult facultyResult = await userManager.CreateAsync(facultyUser, userModel.Password);
                     if (facultyResult.Succeeded)
@@ -88,7 +89,8 @@ namespace CourseHelperBasicVersion.Controllers
                         FirstName = userModel.FirstName,
                         LastName = userModel.LastName,
                         UserName = userModel.UserName,
-                        StudentNumber = studentNumber
+                        StudentNumber = studentNumber,
+                        Role = "Student"
                     };
 
                     IdentityResult studentResult = await userManager.CreateAsync(studentUser, userModel.Password);
@@ -107,7 +109,14 @@ namespace CourseHelperBasicVersion.Controllers
                         studentDB.SaveStudent(student);
                         await userManager.AddToRoleAsync(studentUser, "Student");
                         TempData["successMessage"] = $"Student {studentUser.UserName} successfully created.";
-                        return RedirectToAction(nameof(Login));
+                        if (HttpContext.User.Identity.IsAuthenticated)
+                        {
+                            return RedirectToAction(nameof(List));
+                        }
+                        else
+                        {
+                            return RedirectToAction(nameof(Login));
+                        }
                     }
                     else
                     {
@@ -318,6 +327,7 @@ namespace CourseHelperBasicVersion.Controllers
                     Microsoft.AspNetCore.Identity.SignInResult result = await signInManager.PasswordSignInAsync(user, model.Password, false, false);
                     if (result.Succeeded)
                     {
+                        
                         TempData["successMessage"] = $"Successfully logged in.";
                         string indexUrl = "/";
                         if (await userManager.IsInRoleAsync(user, "Admin"))

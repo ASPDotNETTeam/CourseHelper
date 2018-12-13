@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<CourseHelperUser>
 @{
     ViewBag.Title = "List of accounts";
-    ViewBag.Title = "List";
+    ViewBag.Active = "List";
 }
 
 
@@ -22,22 +22,24 @@
                     <th scope="col">First Name</th>
                     <th scope="col">Last Name</th>
                     <th scope="col">Username</th>
+                    <th scope="col">Role</th>
                     <th scope="col"></th>
                 </tr>
             </thead>
                 @foreach (CourseHelperUser user in Model)
                 {
-                    <tr align="center">
-                        <td><p>@user.FirstName</p></td>
-                        <td><p>@user.LastName</p></td>
-                        <td><p>@user.UserName</p></td>
-                        <td>
-                            <form asp-action="Delete" asp-area="Admin" asp-route-id="@user.Id" method="post">
-                                <a class="btn btn-sm btn-primary" asp-action="Edit" asp-route-id="@user.Id">Edit</a>
-                                <button type="submit"class="btn btn-sm btn-danger">Delete</button>
-                            </form>
-                        </td>
-                    </tr>
+            <tr align="center">
+                <td><p>@user.FirstName</p></td>
+                <td><p>@user.LastName</p></td>
+                <td><p>@user.UserName</p></td>
+                <td><p>@user.Role</p></td>
+                <td>
+                    <form asp-action="Delete" asp-area="Admin" asp-route-id="@user.Id" method="post">
+                        <a class="btn btn-sm btn-primary" asp-action="Edit" asp-route-id="@user.Id">Edit</a>
+                        <button type="submit" class="btn btn-sm btn-danger">Delete</button>
+                    </form>
+                </td>
+            </tr>
                 }
         </table>
     </div>

@@ -47,7 +47,8 @@ namespace CourseHelperBasicVersion.Models
                 new Student { StudentNumber = 300896112, FirstName = "Boo", LastName = "Radley", Semester = 3, Status = STUDENT_STATUS.PENDING, IsRegistered = false },
                 new Student { StudentNumber = 300589657, FirstName = "Jem", LastName = "Finch", Semester = 2, Status = STUDENT_STATUS.PAID, IsRegistered = true },
                 new Student { StudentNumber = 300332225, FirstName = "Maudie", LastName = "Atkinson", Semester = 2, Status = STUDENT_STATUS.PENDING, IsRegistered = true },
-                new Student { StudentNumber = 300745442, FirstName = "Dill", LastName = "Harris", Semester = 2, Status = STUDENT_STATUS.UNPAID, IsRegistered = false }
+                new Student { StudentNumber = 300745442, FirstName = "Dill", LastName = "Harris", Semester = 2, Status = STUDENT_STATUS.UNPAID, IsRegistered = false },
+                new Student { StudentNumber = 123456788, FirstName = "Student", LastName = "Stoodent", Semester = 1, Status = STUDENT_STATUS.PAID, IsRegistered = true }
                 );
         }
 

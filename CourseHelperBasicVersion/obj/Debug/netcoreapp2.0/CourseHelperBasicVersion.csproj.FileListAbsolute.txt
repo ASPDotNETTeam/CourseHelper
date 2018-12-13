@@ -94,3 +94,15 @@ C:\Users\Jay Jo\Documents\GitHub\CourseHelper\CourseHelperBasicVersion\obj\Debug
 C:\Users\Jay Jo\Documents\GitHub\CourseHelper\CourseHelperBasicVersion\obj\Debug\netcoreapp2.0\CourseHelperBasicVersion.AssemblyInfo.cs
 C:\Users\Jay Jo\Documents\GitHub\CourseHelper\CourseHelperBasicVersion\obj\Debug\netcoreapp2.0\CourseHelperBasicVersion.dll
 C:\Users\Jay Jo\Documents\GitHub\CourseHelper\CourseHelperBasicVersion\obj\Debug\netcoreapp2.0\CourseHelperBasicVersion.pdb
+C:\Users\300993981\Desktop\CourseHelper-master\CourseHelperBasicVersion\bin\Debug\netcoreapp2.0\CourseHelperBasicVersion.deps.json
+C:\Users\300993981\Desktop\CourseHelper-master\CourseHelperBasicVersion\bin\Debug\netcoreapp2.0\CourseHelperBasicVersion.runtimeconfig.json
+C:\Users\300993981\Desktop\CourseHelper-master\CourseHelperBasicVersion\bin\Debug\netcoreapp2.0\CourseHelperBasicVersion.runtimeconfig.dev.json
+C:\Users\300993981\Desktop\CourseHelper-master\CourseHelperBasicVersion\bin\Debug\netcoreapp2.0\CourseHelperBasicVersion.dll
+C:\Users\300993981\Desktop\CourseHelper-master\CourseHelperBasicVersion\bin\Debug\netcoreapp2.0\CourseHelperBasicVersion.pdb
+C:\Users\300993981\Desktop\CourseHelper-master\CourseHelperBasicVersion\obj\Debug\netcoreapp2.0\CourseHelperBasicVersion.csprojAssemblyReference.cache
+C:\Users\300993981\Desktop\CourseHelper-master\CourseHelperBasicVersion\obj\Debug\netcoreapp2.0\CourseHelperBasicVersion.csproj.CoreCompileInputs.cache
+C:\Users\300993981\Desktop\CourseHelper-master\CourseHelperBasicVersion\obj\Debug\netcoreapp2.0\UserSecretsAssemblyInfo.cs
+C:\Users\300993981\Desktop\CourseHelper-master\CourseHelperBasicVersion\obj\Debug\netcoreapp2.0\CourseHelperBasicVersion.AssemblyInfoInputs.cache
+C:\Users\300993981\Desktop\CourseHelper-master\CourseHelperBasicVersion\obj\Debug\netcoreapp2.0\CourseHelperBasicVersion.AssemblyInfo.cs
+C:\Users\300993981\Desktop\CourseHelper-master\CourseHelperBasicVersion\obj\Debug\netcoreapp2.0\CourseHelperBasicVersion.dll
+C:\Users\300993981\Desktop\CourseHelper-master\CourseHelperBasicVersion\obj\Debug\netcoreapp2.0\CourseHelperBasicVersion.pdb
